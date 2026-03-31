@@ -1,16 +1,67 @@
-# React + Vite
+# Portfólio - Leonnardo Serafim
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Portfólio pessoal desenvolvido para apresentar meus projetos, habilidades e evolução como desenvolvedor.
 
-Currently, two official plugins are available:
+## Sobre
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Este projeto foi criado com foco em uma apresentação simples e moderna, reunindo informações profissionais, tecnologias que utilizo e projetos em destaque em um único lugar.
 
-## React Compiler
+## Tecnologias utilizadas
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React
+- Tailwind CSS
+- JavaScript
+- Vite
 
-## Expanding the ESLint configuration
+## Funcionalidades
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- apresentação pessoal
+- seção de habilidades organizada por categorias
+- seção de projetos
+- contatos com links diretos
+- botão para alternar entre light mode e dark mode
+- botão para copiar email
+- currículo para download
+
+
+## Como executar o projeto
+
+Clone o repositório:
+
+```bash
+git clone https://github.com/leonnardosrfm/portfolio.git
+```
+
+Acesse a pasta do projeto:
+
+```bash
+cd seurepositorio
+```
+
+Instale as dependências:
+
+```bash
+npm install
+```
+
+Inicie o servidor de desenvolvimento:
+
+```bash
+npm run dev
+```
+
+## Objetivo
+
+Este portfólio foi desenvolvido para servir como vitrine dos meus estudos, projetos e capacidades técnicas, além de funcionar como parte da minha apresentação profissional.
+
+## Contato
+
+* LinkedIn: [linkedin.com/in/leonnardo-serafim](https://linkedin.com/in/leonnardo-serafim)
+* GitHub: [github.com/leonnardosrfm](https://github.com/leonnardosrfm)
+* Email: [leonnardo.serafim@proton.me](mailto:leonnardo.serafim@proton.me)
+
+---
+
+Desenvolvido por **Leonnardo Serafim**.
+
+
