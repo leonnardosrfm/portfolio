@@ -17,13 +17,6 @@ Este projeto reúne minha apresentação profissional em uma landing page e uma 
 - PDF.js
 - JSZip
 
-## Estrutura do projeto
-
-O projeto possui duas entradas principais:
-
-- `/` -> página principal do portfólio
-- `/utilities/` -> página de utilidades
-
 ## Funcionalidades
 
 ### Portfólio
@@ -68,15 +61,6 @@ Inicie o ambiente de desenvolvimento:
 
 ```bash
 npm run dev
-```
-
-## Scripts disponíveis
-
-```bash
-npm run dev
-npm run build
-npm run preview
-npm run lint
 ```
 
 ## Objetivo
