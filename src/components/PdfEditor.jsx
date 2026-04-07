@@ -1,12 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import { jsPDF } from "jspdf"
-import {
-    FaDownload,
-    FaFilePdf,
-    FaTrashAlt,
-    FaUpload,
-    FaWrench,
-} from "react-icons/fa"
+import { FaDownload, FaFilePdf, FaTrashAlt, FaWrench } from "react-icons/fa"
 import PdfDropzone from "./PdfDropzone"
 import usePdfDocument from "../hooks/usePdfDocument"
 import { buildFileName, downloadUrl, formatBytes } from "../lib/file-utils"
@@ -150,7 +144,7 @@ export default function PdfEditor() {
                     if (showPageNumbers) {
                         context.textAlign = "right"
                         context.fillText(
-                            `Pagina ${index + 1} de ${pageCount}`,
+                            `Página ${index + 1} de ${pageCount}`,
                             outputCanvas.width - 20,
                             outputCanvas.height - 24
                         )
@@ -198,77 +192,46 @@ export default function PdfEditor() {
     }
 
     return (
-        <div className="rounded-[2rem] border border-black/10 bg-white p-8 dark:border-white/10 dark:bg-zinc-900">
-            <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_21rem] xl:items-stretch">
-                <div className="flex h-full flex-col gap-5">
-                    <PdfDropzone
-                        inputRef={inputRef}
-                        isDragging={isDragging}
-                        isLoading={isLoading}
-                        file={file}
-                        pages={pages}
-                        onOpenPicker={openPicker}
-                        onInputChange={handleInputChange}
-                        onDragEnter={() => setIsDragging(true)}
-                        onDragLeave={() => setIsDragging(false)}
-                        onDrop={handleDrop}
-                    />
+        <div className="rounded-[1.5rem] border border-black/10 bg-white p-6 dark:border-white/10 dark:bg-zinc-900">
+            <div className="space-y-5">
+                <PdfDropzone
+                    inputRef={inputRef}
+                    isDragging={isDragging}
+                    isLoading={isLoading}
+                    file={file}
+                    pages={pages}
+                    onOpenPicker={openPicker}
+                    onInputChange={handleInputChange}
+                    onDragEnter={() => setIsDragging(true)}
+                    onDragLeave={() => setIsDragging(false)}
+                    onDrop={handleDrop}
+                />
 
-                    <div className="flex flex-wrap gap-3">
-                        <button
-                            type="button"
-                            onClick={openPicker}
-                            className="inline-flex items-center gap-2 rounded-full border border-black/10 px-4 py-2 text-sm font-medium transition hover:bg-stone-100 dark:border-white/10 dark:hover:bg-zinc-950"
-                        >
-                            <FaUpload size={13} />
-                            Escolher PDF
-                        </button>
-
-                        <button
-                            type="button"
-                            onClick={handleClear}
-                            disabled={!file && !result}
-                            className="inline-flex items-center gap-2 rounded-full border border-black/10 px-4 py-2 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-40 hover:bg-stone-100 dark:border-white/10 dark:hover:bg-zinc-950"
-                        >
-                            <FaTrashAlt size={13} />
-                            Limpar
-                        </button>
+                <div>
+                    <p className="text-sm font-medium text-slate-700 dark:text-zinc-300">
+                        Rotação
+                    </p>
+                    <div className="mt-3 grid grid-cols-4 gap-2">
+                        {rotations.map((option) => (
+                            <button
+                                key={option.value}
+                                type="button"
+                                onClick={() => setRotation(option.value)}
+                                className={`rounded-xl border px-3 py-2 text-sm font-medium transition ${
+                                    rotation === option.value
+                                        ? "border-slate-900 bg-slate-900 text-white dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-950"
+                                        : "border-black/10 bg-white text-slate-700 hover:bg-stone-50 dark:border-white/10 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800"
+                                }`}
+                            >
+                                {option.label}
+                            </button>
+                        ))}
                     </div>
                 </div>
 
-                <div className="flex h-full flex-col gap-6 rounded-[1.75rem] border border-black/10 bg-stone-50 p-6 dark:border-white/10 dark:bg-zinc-950">
-                    <div className="rounded-2xl border border-black/10 bg-white p-4 dark:border-white/10 dark:bg-zinc-900">
-                        <p className="text-sm font-semibold text-slate-900 dark:text-zinc-100">
-                            Edicoes disponiveis
-                        </p>
-                        <p className="mt-2 text-sm text-slate-600 dark:text-zinc-400">
-                            Rotação, marca d&apos;água, nota de rodapé, escala de cinza e
-                            numeração de páginas.
-                        </p>
-                    </div>
-
-                    <div className="rounded-[1.5rem] border border-black/10 bg-white p-4 dark:border-white/10 dark:bg-zinc-900">
-                        <label className="block text-sm font-semibold text-slate-900 dark:text-zinc-100">
-                            Rotação
-                        </label>
-                        <div className="mt-3 grid grid-cols-4 gap-2">
-                            {rotations.map((option) => (
-                                <button
-                                    key={option.value}
-                                    type="button"
-                                    onClick={() => setRotation(option.value)}
-                                    className={`rounded-2xl border px-3 py-3 text-sm font-semibold transition ${
-                                        rotation === option.value
-                                            ? "border-slate-900 bg-slate-900 text-white dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-950"
-                                            : "border-black/10 bg-stone-50 text-slate-700 hover:bg-stone-100 dark:border-white/10 dark:bg-zinc-950 dark:text-zinc-200 dark:hover:bg-zinc-800"
-                                    }`}
-                                >
-                                    {option.label}
-                                </button>
-                            ))}
-                        </div>
-
-                        <label className="mt-4 block text-sm font-semibold text-slate-900 dark:text-zinc-100">
+                <div className="grid gap-4 md:grid-cols-2">
+                    <div>
+                        <label className="text-sm font-medium text-slate-700 dark:text-zinc-300">
                             Marca d&apos;água
                         </label>
                         <input
@@ -276,85 +239,89 @@ export default function PdfEditor() {
                             value={watermark}
                             onChange={(event) => setWatermark(event.target.value)}
                             placeholder="Ex.: CONFIDENCIAL"
-                            className="mt-2 w-full rounded-2xl border border-black/10 bg-stone-50 px-4 py-3 text-sm outline-none transition focus:border-slate-400 dark:border-white/10 dark:bg-zinc-950 dark:text-zinc-100 dark:focus:border-zinc-400"
+                            className="mt-3 w-full rounded-xl border border-black/10 bg-white px-3 py-2 text-sm outline-none transition focus:border-slate-400 dark:border-white/10 dark:bg-zinc-900 dark:text-zinc-100 dark:focus:border-zinc-400"
                         />
+                    </div>
 
-                        <label className="mt-4 block text-sm font-semibold text-slate-900 dark:text-zinc-100">
+                    <div>
+                        <label className="text-sm font-medium text-slate-700 dark:text-zinc-300">
                             Rodapé
                         </label>
                         <input
                             type="text"
                             value={footerNote}
                             onChange={(event) => setFooterNote(event.target.value)}
-                            placeholder="Texto adicionado no rodapé"
-                            className="mt-2 w-full rounded-2xl border border-black/10 bg-stone-50 px-4 py-3 text-sm outline-none transition focus:border-slate-400 dark:border-white/10 dark:bg-zinc-950 dark:text-zinc-100 dark:focus:border-zinc-400"
+                            placeholder="Texto do rodapé"
+                            className="mt-3 w-full rounded-xl border border-black/10 bg-white px-3 py-2 text-sm outline-none transition focus:border-slate-400 dark:border-white/10 dark:bg-zinc-900 dark:text-zinc-100 dark:focus:border-zinc-400"
                         />
-
-                        <label className="mt-4 flex items-center gap-3 text-sm text-slate-700 dark:text-zinc-200">
-                            <input
-                                type="checkbox"
-                                checked={showPageNumbers}
-                                onChange={(event) => setShowPageNumbers(event.target.checked)}
-                                className="h-4 w-4 rounded border-black/20"
-                            />
-                            Mostrar numeração de páginas
-                        </label>
-
-                        <label className="mt-3 flex items-center gap-3 text-sm text-slate-700 dark:text-zinc-200">
-                            <input
-                                type="checkbox"
-                                checked={grayscale}
-                                onChange={(event) => setGrayscale(event.target.checked)}
-                                className="h-4 w-4 rounded border-black/20"
-                            />
-                            Exportar em escala de cinza
-                        </label>
                     </div>
+                </div>
 
-                    {error && (
-                        <div className="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm leading-6 text-rose-700 dark:border-rose-500/20 dark:bg-rose-500/10 dark:text-rose-200">
-                            {error}
-                        </div>
-                    )}
+                <div className="flex flex-wrap gap-5 text-sm text-slate-700 dark:text-zinc-300">
+                    <label className="flex items-center gap-2">
+                        <input
+                            type="checkbox"
+                            checked={showPageNumbers}
+                            onChange={(event) => setShowPageNumbers(event.target.checked)}
+                            className="h-4 w-4 rounded border-black/20"
+                        />
+                        Mostrar páginas
+                    </label>
 
+                    <label className="flex items-center gap-2">
+                        <input
+                            type="checkbox"
+                            checked={grayscale}
+                            onChange={(event) => setGrayscale(event.target.checked)}
+                            className="h-4 w-4 rounded border-black/20"
+                        />
+                        Escala de cinza
+                    </label>
+                </div>
+
+                {error && (
+                    <div className="rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700 dark:border-rose-500/20 dark:bg-rose-500/10 dark:text-rose-200">
+                        {error}
+                    </div>
+                )}
+
+                <div className="flex flex-wrap gap-3">
                     <button
                         type="button"
                         onClick={handleExport}
                         disabled={!file || !pdf || !pages.length || isLoading || isExporting}
-                        className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition disabled:cursor-not-allowed disabled:opacity-40 hover:bg-slate-800 dark:bg-zinc-100 dark:text-zinc-950 dark:hover:bg-white"
+                        className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition disabled:cursor-not-allowed disabled:opacity-40 hover:bg-slate-800 dark:bg-zinc-100 dark:text-zinc-950 dark:hover:bg-white"
                     >
                         <FaWrench size={13} />
-                        {isExporting ? "Aplicando edicoes..." : "Gerar PDF editado"}
+                        {isExporting ? "Aplicando edições..." : "Gerar PDF editado"}
                     </button>
 
-                    <div className="mt-auto rounded-[1.5rem] border border-black/10 bg-white p-5 dark:border-white/10 dark:bg-zinc-900">
-                        <div className="flex items-center gap-3">
-                            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-stone-100 text-slate-700 dark:bg-zinc-800 dark:text-zinc-200">
-                                <FaFilePdf size={16} />
-                            </div>
-                            <div>
-                                <p className="text-sm font-semibold text-slate-900 dark:text-zinc-100">
-                                    PDF editado
-                                </p>
-                                <p className="text-sm text-slate-600 dark:text-zinc-400">
-                                    {result
-                                        ? `${pageCount} página(s) • ${formatBytes(result.size)}`
-                                        : "Gere o arquivo para liberar o download."}
-                                </p>
-                            </div>
-                        </div>
+                    <button
+                        type="button"
+                        onClick={() => result && downloadUrl(result.url, result.name)}
+                        disabled={!result}
+                        className="inline-flex items-center gap-2 rounded-full border border-black/10 px-5 py-3 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-40 hover:bg-stone-50 dark:border-white/10 dark:hover:bg-zinc-800"
+                    >
+                        <FaDownload size={13} />
+                        Baixar PDF
+                    </button>
 
-                        <button
-                            type="button"
-                            onClick={() => result && downloadUrl(result.url, result.name)}
-                            disabled={!result}
-                            className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full border border-black/10 px-5 py-3 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-40 hover:bg-stone-100 dark:border-white/10 dark:hover:bg-zinc-800"
-                        >
-                            <FaDownload size={13} />
-                            Baixar PDF editado
-                        </button>
-                    </div>
+                    <button
+                        type="button"
+                        onClick={handleClear}
+                        disabled={!file && !result}
+                        className="inline-flex items-center gap-2 rounded-full border border-black/10 px-5 py-3 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-40 hover:bg-stone-50 dark:border-white/10 dark:hover:bg-zinc-800"
+                    >
+                        <FaTrashAlt size={13} />
+                        Limpar
+                    </button>
                 </div>
+
+                {result && (
+                    <p className="text-sm text-slate-600 dark:text-zinc-400">
+                        PDF pronto: {pageCount} página(s) • {formatBytes(result.size)}
+                    </p>
+                )}
             </div>
         </div>
     )

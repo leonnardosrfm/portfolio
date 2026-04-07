@@ -10,13 +10,10 @@ const PdfToWordConverter = lazy(() => import("./PdfToWordConverter"))
 
 function UtilityPanelFallback() {
     return (
-        <div className="rounded-[2rem] border border-black/10 bg-white p-8 dark:border-white/10 dark:bg-zinc-900">
-            <div className="flex min-h-[32rem] flex-col justify-center rounded-[1.75rem] border border-dashed border-black/10 bg-stone-50 px-6 py-10 text-center dark:border-white/10 dark:bg-zinc-950">
+        <div className="rounded-[1.5rem] border border-black/10 bg-white p-6 dark:border-white/10 dark:bg-zinc-900">
+            <div className="flex min-h-64 flex-col justify-center rounded-[1rem] border border-dashed border-black/10 bg-stone-50 px-6 py-10 text-center dark:border-white/10 dark:bg-zinc-950">
                 <p className="text-lg font-semibold text-slate-900 dark:text-zinc-50">
                     Carregando utilitário...
-                </p>
-                <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-zinc-400">
-                    Os conversores PDF são carregados sob demanda para deixar a página mais leve.
                 </p>
             </div>
         </div>
@@ -50,35 +47,21 @@ export default function UtilitiesSection({ standalone = false }) {
                 </div>
             )}
 
-            <div className="grid gap-8 lg:grid-cols-[18rem_minmax(0,1fr)] lg:items-start">
-                <div className="rounded-[2rem] border border-black/10 bg-white p-4 dark:border-white/10 dark:bg-zinc-900">
-                    <div className="space-y-3">
+            <div className="grid gap-6 lg:grid-cols-[14rem_minmax(0,1fr)] lg:items-start">
+                <div className="rounded-[1.5rem] border border-black/10 bg-white p-3 dark:border-white/10 dark:bg-zinc-900">
+                    <div className="space-y-2">
                         {utilities.map((utility) => (
                             <button
                                 key={utility.id}
                                 type="button"
                                 onClick={() => setSelectedId(utility.id)}
-                                className={`w-full rounded-[1.5rem] border px-4 py-4 text-left transition ${
+                                className={`w-full rounded-[1rem] border px-3 py-3 text-left transition ${
                                     selectedUtility.id === utility.id
                                         ? "border-slate-900 bg-slate-900 text-white dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-950"
                                         : "border-black/10 bg-white text-slate-900 hover:bg-stone-50 dark:border-white/10 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800"
                                 }`}
                             >
-                                <p className="text-lg font-semibold">{utility.title}</p>
-                                <div className="mt-3 flex flex-wrap gap-2">
-                                    {utility.supportedFormats.map((format) => (
-                                        <span
-                                            key={format}
-                                            className={`rounded-full border px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] ${
-                                                selectedUtility.id === utility.id
-                                                    ? "border-white/20 text-white dark:border-zinc-950/20 dark:text-zinc-950"
-                                                    : "border-black/10 text-slate-600 dark:border-white/10 dark:text-zinc-300"
-                                            }`}
-                                        >
-                                            {format}
-                                        </span>
-                                    ))}
-                                </div>
+                                <p className="text-sm font-semibold">{utility.title}</p>
                             </button>
                         ))}
                     </div>

@@ -1,18 +1,11 @@
 import { useEffect, useState } from "react"
-import {
-    extractPageText,
-    isPdfFile,
-    loadPdfDocument,
-    renderPdfPage,
-    revokePagePreviews,
-} from "../lib/pdf-utils"
+import { extractPageText, isPdfFile, loadPdfDocument } from "../lib/pdf-utils"
 
 function cleanupDocument(documentState) {
     if (!documentState) {
         return
     }
 
-    revokePagePreviews(documentState.pages)
     documentState.pdf?.destroy?.()
 }
 
@@ -44,29 +37,11 @@ export default function usePdfDocument() {
 
             for (let pageNumber = 1; pageNumber <= loaded.pdf.numPages; pageNumber += 1) {
                 const page = await loaded.pdf.getPage(pageNumber)
-                const preview = await renderPdfPage(page, { scale: 0.45 })
                 const text = await extractPageText(page)
-                const previewBlob = await new Promise((resolve, reject) => {
-                    preview.canvas.toBlob(
-                        (blob) => {
-                            if (blob) {
-                                resolve(blob)
-                                return
-                            }
-
-                            reject(new Error("Falha ao gerar preview."))
-                        },
-                        "image/png",
-                        0.92
-                    )
-                })
 
                 pages.push({
                     pageNumber,
-                    width: preview.width,
-                    height: preview.height,
                     text,
-                    previewUrl: URL.createObjectURL(previewBlob),
                 })
             }
 

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import { jsPDF } from "jspdf"
-import { FaDownload, FaFilePdf, FaImage, FaTrashAlt, FaUpload } from "react-icons/fa"
+import { FaDownload, FaFilePdf, FaTrashAlt, FaUpload } from "react-icons/fa"
 
 const acceptedTypes = new Set(["image/png", "image/jpeg", "image/webp"])
 
@@ -96,24 +96,25 @@ export default function PdfConverter() {
         try {
             const preparedItems = await Promise.all(
                 nextFiles.map(async (file) => {
-                    const previewUrl = URL.createObjectURL(file)
-                    const dataUrl = await readDataUrl(file)
-                    const image = await loadImage(previewUrl)
+                    const sourceUrl = URL.createObjectURL(file)
 
-                    return {
-                        file,
-                        previewUrl,
-                        dataUrl,
-                        width: image.naturalWidth,
-                        height: image.naturalHeight,
+                    try {
+                        const dataUrl = await readDataUrl(file)
+                        const image = await loadImage(sourceUrl)
+
+                        return {
+                            file,
+                            dataUrl,
+                            width: image.naturalWidth,
+                            height: image.naturalHeight,
+                        }
+                    } finally {
+                        URL.revokeObjectURL(sourceUrl)
                     }
                 })
             )
 
-            setItems((current) => {
-                current.forEach((item) => URL.revokeObjectURL(item.previewUrl))
-                return preparedItems
-            })
+            setItems(preparedItems)
         } catch {
             setError("Não foi possível preparar os arquivos selecionados.")
         }
@@ -130,7 +131,6 @@ export default function PdfConverter() {
     }
 
     function clearAll() {
-        items.forEach((item) => URL.revokeObjectURL(item.previewUrl))
         setItems([])
         setPdfFile(null)
         setError("")
@@ -185,148 +185,88 @@ export default function PdfConverter() {
     }
 
     return (
-        <div className="rounded-[2rem] border border-black/10 bg-white p-8 dark:border-white/10 dark:bg-zinc-900">
-            <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_21rem] xl:items-stretch">
-                <div className="flex h-full flex-col gap-5">
-                    <input
-                        ref={inputRef}
-                        type="file"
-                        accept="image/png,image/jpeg,image/webp"
-                        multiple
-                        onChange={handleInputChange}
-                        className="hidden"
-                    />
+        <div className="rounded-[1.5rem] border border-black/10 bg-white p-6 dark:border-white/10 dark:bg-zinc-900">
+            <div className="space-y-5">
+                <input
+                    ref={inputRef}
+                    type="file"
+                    accept="image/png,image/jpeg,image/webp"
+                    multiple
+                    onChange={handleInputChange}
+                    className="hidden"
+                />
 
-                    <button
-                        type="button"
-                        onClick={openPicker}
-                        onDragOver={(event) => event.preventDefault()}
-                        onDragEnter={() => setIsDragging(true)}
-                        onDragLeave={() => setIsDragging(false)}
-                        onDrop={handleDrop}
-                        className={`flex min-h-72 w-full flex-1 flex-col items-center justify-center rounded-[1.75rem] border-2 border-dashed px-6 py-10 text-center transition ${
-                            isDragging
-                                ? "border-slate-900 bg-stone-100 dark:border-zinc-100 dark:bg-zinc-950"
-                                : "border-black/10 bg-stone-50 hover:bg-stone-100 dark:border-white/10 dark:bg-zinc-950 dark:hover:bg-zinc-900"
-                        }`}
-                    >
-                        {items.length ? (
-                            <div className="w-full">
-                                <div className="grid gap-4 sm:grid-cols-2">
-                                    {items.map((item) => (
-                                        <div
-                                            key={`${item.file.name}-${item.file.size}`}
-                                            className="overflow-hidden rounded-[1.25rem] border border-black/10 bg-white dark:border-white/10 dark:bg-zinc-900"
-                                        >
-                                            <img
-                                                src={item.previewUrl}
-                                                alt={item.file.name}
-                                                className="h-40 w-full object-contain"
-                                            />
-                                            <div className="border-t border-black/10 px-4 py-3 text-left text-sm text-slate-600 dark:border-white/10 dark:text-zinc-300">
-                                                <p className="truncate font-medium text-slate-900 dark:text-zinc-100">
-                                                    {item.file.name}
-                                                </p>
-                                                <p className="mt-1">
-                                                    {item.width} x {item.height} •{" "}
-                                                    {formatBytes(item.file.size)}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        ) : (
-                            <>
-                                <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-slate-900 text-white dark:bg-zinc-100 dark:text-zinc-950">
-                                    <FaUpload size={20} />
-                                </div>
-                                <p className="mt-5 text-lg font-semibold text-slate-900 dark:text-zinc-50">
-                                    Arraste imagens aqui
-                                </p>
-                                <p className="mt-2 max-w-md text-sm leading-6 text-slate-600 dark:text-zinc-400">
-                                    Ou clique para escolher uma ou mais imagens PNG, JPG ou WebP.
-                                </p>
-                            </>
-                        )}
-                    </button>
-
-                    <div className="flex flex-wrap gap-3">
-                        <button
-                            type="button"
-                            onClick={openPicker}
-                            className="inline-flex items-center gap-2 rounded-full border border-black/10 px-4 py-2 text-sm font-medium transition hover:bg-stone-100 dark:border-white/10 dark:hover:bg-zinc-950"
-                        >
-                            <FaUpload size={13} />
-                            Escolher arquivos
-                        </button>
-
-                        <button
-                            type="button"
-                            onClick={clearAll}
-                            disabled={!items.length && !pdfFile}
-                            className="inline-flex items-center gap-2 rounded-full border border-black/10 px-4 py-2 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-40 hover:bg-stone-100 dark:border-white/10 dark:hover:bg-zinc-950"
-                        >
-                            <FaTrashAlt size={13} />
-                            Limpar
-                        </button>
+                <button
+                    type="button"
+                    onClick={openPicker}
+                    onDragOver={(event) => event.preventDefault()}
+                    onDragEnter={() => setIsDragging(true)}
+                    onDragLeave={() => setIsDragging(false)}
+                    onDrop={handleDrop}
+                    className={`flex min-h-52 w-full flex-col items-center justify-center rounded-[1rem] border-2 border-dashed px-6 py-10 text-center transition ${
+                        isDragging
+                            ? "border-slate-900 bg-stone-100 dark:border-zinc-100 dark:bg-zinc-950"
+                            : "border-black/10 bg-stone-50 hover:bg-stone-100 dark:border-white/10 dark:bg-zinc-950 dark:hover:bg-zinc-900"
+                    }`}
+                >
+                    <div className="flex h-14 w-14 items-center justify-center rounded-3xl bg-slate-900 text-white dark:bg-zinc-100 dark:text-zinc-950">
+                        {items.length ? <FaFilePdf size={18} /> : <FaUpload size={18} />}
                     </div>
-                </div>
+                    <p className="mt-4 text-base font-semibold text-slate-900 dark:text-zinc-50">
+                        {items.length
+                            ? `${items.length} arquivo(s) selecionado(s)`
+                            : "Selecione uma ou mais imagens"}
+                    </p>
+                    <p className="mt-2 text-sm text-slate-600 dark:text-zinc-400">
+                        {items.length
+                            ? items.map((item) => item.file.name).join(", ")
+                            : "PNG, JPG ou WebP. Clique ou arraste os arquivos."}
+                    </p>
+                </button>
 
-                <div className="flex h-full flex-col gap-6 rounded-[1.75rem] border border-black/10 bg-stone-50 p-6 dark:border-white/10 dark:bg-zinc-950">
-                    <div className="rounded-2xl border border-black/10 bg-white p-4 dark:border-white/10 dark:bg-zinc-900">
-                        <p className="text-sm font-semibold text-slate-900 dark:text-zinc-100">
-                            Arquivos
-                        </p>
-                        <p className="mt-2 text-sm text-slate-600 dark:text-zinc-400">
-                            {items.length ? `${items.length} imagem(ns)` : "Nenhum arquivo"}
-                        </p>
+                {error && (
+                    <div className="rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700 dark:border-rose-500/20 dark:bg-rose-500/10 dark:text-rose-200">
+                        {error}
                     </div>
+                )}
 
-                    {error && (
-                        <div className="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm leading-6 text-rose-700 dark:border-rose-500/20 dark:bg-rose-500/10 dark:text-rose-200">
-                            {error}
-                        </div>
-                    )}
-
+                <div className="flex flex-wrap gap-3">
                     <button
                         type="button"
                         onClick={handleGeneratePdf}
                         disabled={!items.length || isGenerating}
-                        className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition disabled:cursor-not-allowed disabled:opacity-40 hover:bg-slate-800 dark:bg-zinc-100 dark:text-zinc-950 dark:hover:bg-white"
+                        className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition disabled:cursor-not-allowed disabled:opacity-40 hover:bg-slate-800 dark:bg-zinc-100 dark:text-zinc-950 dark:hover:bg-white"
                     >
                         <FaFilePdf size={14} />
                         {isGenerating ? "Gerando PDF..." : "Gerar PDF"}
                     </button>
 
-                    <div className="mt-auto rounded-[1.5rem] border border-black/10 bg-white p-5 dark:border-white/10 dark:bg-zinc-900">
-                        <div className="flex items-center gap-3">
-                            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-stone-100 text-slate-700 dark:bg-zinc-800 dark:text-zinc-200">
-                                <FaImage size={16} />
-                            </div>
-                            <div>
-                                <p className="text-sm font-semibold text-slate-900 dark:text-zinc-100">
-                                    PDF gerado
-                                </p>
-                                <p className="text-sm text-slate-600 dark:text-zinc-400">
-                                    {pdfFile
-                                        ? `${pdfFile.pages} página(s) • ${formatBytes(pdfFile.size)}`
-                                        : "Gere um PDF para liberar o download."}
-                                </p>
-                            </div>
-                        </div>
+                    <button
+                        type="button"
+                        onClick={() => pdfFile && downloadFile(pdfFile.url, pdfFile.name)}
+                        disabled={!pdfFile}
+                        className="inline-flex items-center gap-2 rounded-full border border-black/10 px-5 py-3 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-40 hover:bg-stone-50 dark:border-white/10 dark:hover:bg-zinc-800"
+                    >
+                        <FaDownload size={13} />
+                        Baixar PDF
+                    </button>
 
-                        <button
-                            type="button"
-                            onClick={() => pdfFile && downloadFile(pdfFile.url, pdfFile.name)}
-                            disabled={!pdfFile}
-                            className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full border border-black/10 px-5 py-3 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-40 hover:bg-stone-100 dark:border-white/10 dark:hover:bg-zinc-800"
-                        >
-                            <FaDownload size={13} />
-                            Baixar PDF
-                        </button>
-                    </div>
+                    <button
+                        type="button"
+                        onClick={clearAll}
+                        disabled={!items.length && !pdfFile}
+                        className="inline-flex items-center gap-2 rounded-full border border-black/10 px-5 py-3 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-40 hover:bg-stone-50 dark:border-white/10 dark:hover:bg-zinc-800"
+                    >
+                        <FaTrashAlt size={13} />
+                        Limpar
+                    </button>
                 </div>
+
+                {pdfFile && (
+                    <p className="text-sm text-slate-600 dark:text-zinc-400">
+                        PDF pronto: {pdfFile.pages} página(s) • {formatBytes(pdfFile.size)}
+                    </p>
+                )}
             </div>
         </div>
     )

@@ -1,13 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import JSZip from "jszip"
-import {
-    FaDownload,
-    FaFileArchive,
-    FaImage,
-    FaImages,
-    FaTrashAlt,
-    FaUpload,
-} from "react-icons/fa"
+import { FaDownload, FaImages, FaTrashAlt } from "react-icons/fa"
 import PdfDropzone from "./PdfDropzone"
 import usePdfDocument from "../hooks/usePdfDocument"
 import { buildFileName, canvasToBlob, downloadUrl, formatBytes } from "../lib/file-utils"
@@ -20,9 +13,9 @@ const imageFormats = [
 ]
 
 const qualityOptions = [
-    { label: "Padrao", value: 1.5 },
+    { label: "Padrão", value: 1.5 },
     { label: "Alta", value: 2 },
-    { label: "Maxima", value: 2.5 },
+    { label: "Máxima", value: 2.5 },
 ]
 
 function buildPageName(fileName, pageNumber, extension) {
@@ -141,60 +134,37 @@ export default function PdfToImageConverter() {
     const targetFormat = imageFormats.find((item) => item.mime === targetMime) ?? imageFormats[0]
 
     return (
-        <div className="rounded-[2rem] border border-black/10 bg-white p-8 dark:border-white/10 dark:bg-zinc-900">
-            <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_21rem] xl:items-stretch">
-                <div className="flex h-full flex-col gap-5">
-                    <PdfDropzone
-                        inputRef={inputRef}
-                        isDragging={isDragging}
-                        isLoading={isLoading}
-                        file={file}
-                        pages={pages}
-                        onOpenPicker={openPicker}
-                        onInputChange={handleInputChange}
-                        onDragEnter={() => setIsDragging(true)}
-                        onDragLeave={() => setIsDragging(false)}
-                        onDrop={handleDrop}
-                    />
+        <div className="rounded-[1.5rem] border border-black/10 bg-white p-6 dark:border-white/10 dark:bg-zinc-900">
+            <div className="space-y-5">
+                <PdfDropzone
+                    inputRef={inputRef}
+                    isDragging={isDragging}
+                    isLoading={isLoading}
+                    file={file}
+                    pages={pages}
+                    onOpenPicker={openPicker}
+                    onInputChange={handleInputChange}
+                    onDragEnter={() => setIsDragging(true)}
+                    onDragLeave={() => setIsDragging(false)}
+                    onDrop={handleDrop}
+                />
 
-                    <div className="flex flex-wrap gap-3">
-                        <button
-                            type="button"
-                            onClick={openPicker}
-                            className="inline-flex items-center gap-2 rounded-full border border-black/10 px-4 py-2 text-sm font-medium transition hover:bg-stone-100 dark:border-white/10 dark:hover:bg-zinc-950"
-                        >
-                            <FaUpload size={13} />
-                            Escolher PDF
-                        </button>
-
-                        <button
-                            type="button"
-                            onClick={handleClear}
-                            disabled={!file && !result}
-                            className="inline-flex items-center gap-2 rounded-full border border-black/10 px-4 py-2 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-40 hover:bg-stone-100 dark:border-white/10 dark:hover:bg-zinc-950"
-                        >
-                            <FaTrashAlt size={13} />
-                            Limpar
-                        </button>
-                    </div>
-                </div>
-
-                <div className="flex h-full flex-col gap-6 rounded-[1.75rem] border border-black/10 bg-stone-50 p-6 dark:border-white/10 dark:bg-zinc-950">
+                <div className="grid gap-4 md:grid-cols-2">
                     <div>
-                        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500 dark:text-zinc-400">
-                            Formato de saída
+                        <p className="text-sm font-medium text-slate-700 dark:text-zinc-300">
+                            Formato
                         </p>
-                        <div className="mt-4 grid grid-cols-3 gap-3">
+                        <div className="mt-3 grid grid-cols-3 gap-2">
                             {imageFormats.map((format) => (
                                 <button
                                     key={format.mime}
                                     type="button"
                                     onClick={() => setTargetMime(format.mime)}
                                     disabled={!file}
-                                    className={`rounded-2xl border px-3 py-3 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-40 ${
+                                    className={`rounded-xl border px-3 py-2 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-40 ${
                                         targetMime === format.mime
                                             ? "border-slate-900 bg-slate-900 text-white dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-950"
-                                            : "border-black/10 bg-white text-slate-700 hover:bg-stone-100 dark:border-white/10 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800"
+                                            : "border-black/10 bg-white text-slate-700 hover:bg-stone-50 dark:border-white/10 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800"
                                     }`}
                                 >
                                     {format.label}
@@ -203,15 +173,15 @@ export default function PdfToImageConverter() {
                         </div>
                     </div>
 
-                    <div className="rounded-[1.5rem] border border-black/10 bg-white p-4 dark:border-white/10 dark:bg-zinc-900">
-                        <label className="block text-sm font-semibold text-slate-900 dark:text-zinc-100">
-                            Páginas para exportar
+                    <div>
+                        <label className="text-sm font-medium text-slate-700 dark:text-zinc-300">
+                            Páginas
                         </label>
                         <select
                             value={selectedPage}
                             onChange={(event) => setSelectedPage(event.target.value)}
                             disabled={!file}
-                            className="mt-2 w-full rounded-2xl border border-black/10 bg-stone-50 px-4 py-3 text-sm outline-none transition disabled:cursor-not-allowed disabled:opacity-40 focus:border-slate-400 dark:border-white/10 dark:bg-zinc-950 dark:text-zinc-100 dark:focus:border-zinc-400"
+                            className="mt-3 w-full rounded-xl border border-black/10 bg-white px-3 py-2 text-sm outline-none transition focus:border-slate-400 disabled:cursor-not-allowed disabled:opacity-40 dark:border-white/10 dark:bg-zinc-900 dark:text-zinc-100 dark:focus:border-zinc-400"
                         >
                             <option value="all">Todas as páginas</option>
                             {pages.map((page) => (
@@ -220,77 +190,75 @@ export default function PdfToImageConverter() {
                                 </option>
                             ))}
                         </select>
-
-                        <p className="mt-4 text-sm font-semibold text-slate-900 dark:text-zinc-100">
-                            Qualidade
-                        </p>
-                        <div className="mt-3 grid grid-cols-3 gap-2">
-                            {qualityOptions.map((option) => (
-                                <button
-                                    key={option.value}
-                                    type="button"
-                                    onClick={() => setScale(option.value)}
-                                    disabled={!file}
-                                    className={`rounded-2xl border px-3 py-3 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-40 ${
-                                        scale === option.value
-                                            ? "border-slate-900 bg-slate-900 text-white dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-950"
-                                            : "border-black/10 bg-stone-50 text-slate-700 hover:bg-stone-100 dark:border-white/10 dark:bg-zinc-950 dark:text-zinc-200 dark:hover:bg-zinc-800"
-                                    }`}
-                                >
-                                    {option.label}
-                                </button>
-                            ))}
-                        </div>
                     </div>
+                </div>
 
-                    {error && (
-                        <div className="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm leading-6 text-rose-700 dark:border-rose-500/20 dark:bg-rose-500/10 dark:text-rose-200">
-                            {error}
-                        </div>
-                    )}
+                <div>
+                    <p className="text-sm font-medium text-slate-700 dark:text-zinc-300">
+                        Qualidade
+                    </p>
+                    <div className="mt-3 grid grid-cols-3 gap-2">
+                        {qualityOptions.map((option) => (
+                            <button
+                                key={option.value}
+                                type="button"
+                                onClick={() => setScale(option.value)}
+                                disabled={!file}
+                                className={`rounded-xl border px-3 py-2 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-40 ${
+                                    scale === option.value
+                                        ? "border-slate-900 bg-slate-900 text-white dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-950"
+                                        : "border-black/10 bg-white text-slate-700 hover:bg-stone-50 dark:border-white/10 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800"
+                                }`}
+                            >
+                                {option.label}
+                            </button>
+                        ))}
+                    </div>
+                </div>
 
+                {error && (
+                    <div className="rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700 dark:border-rose-500/20 dark:bg-rose-500/10 dark:text-rose-200">
+                        {error}
+                    </div>
+                )}
+
+                <div className="flex flex-wrap gap-3">
                     <button
                         type="button"
                         onClick={handleExport}
                         disabled={!file || !pdf || !pages.length || isLoading || isExporting}
-                        className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition disabled:cursor-not-allowed disabled:opacity-40 hover:bg-slate-800 dark:bg-zinc-100 dark:text-zinc-950 dark:hover:bg-white"
+                        className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition disabled:cursor-not-allowed disabled:opacity-40 hover:bg-slate-800 dark:bg-zinc-100 dark:text-zinc-950 dark:hover:bg-white"
                     >
                         <FaImages size={14} />
                         {isExporting ? "Gerando imagens..." : `Converter para ${targetFormat.label}`}
                     </button>
 
-                    <div className="mt-auto rounded-[1.5rem] border border-black/10 bg-white p-5 dark:border-white/10 dark:bg-zinc-900">
-                        <div className="flex items-center gap-3">
-                            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-stone-100 text-slate-700 dark:bg-zinc-800 dark:text-zinc-200">
-                                {selectedPage === "all" && pageCount > 1 ? (
-                                    <FaFileArchive size={16} />
-                                ) : (
-                                    <FaImage size={16} />
-                                )}
-                            </div>
-                            <div>
-                                <p className="text-sm font-semibold text-slate-900 dark:text-zinc-100">
-                                    Arquivo de saída
-                                </p>
-                                <p className="text-sm text-slate-600 dark:text-zinc-400">
-                                    {result
-                                        ? `${formatBytes(result.size)}`
-                                        : "Converta o PDF para liberar o download."}
-                                </p>
-                            </div>
-                        </div>
+                    <button
+                        type="button"
+                        onClick={() => result && downloadUrl(result.url, result.name)}
+                        disabled={!result}
+                        className="inline-flex items-center gap-2 rounded-full border border-black/10 px-5 py-3 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-40 hover:bg-stone-50 dark:border-white/10 dark:hover:bg-zinc-800"
+                    >
+                        <FaDownload size={13} />
+                        Baixar arquivo
+                    </button>
 
-                        <button
-                            type="button"
-                            onClick={() => result && downloadUrl(result.url, result.name)}
-                            disabled={!result}
-                            className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full border border-black/10 px-5 py-3 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-40 hover:bg-stone-100 dark:border-white/10 dark:hover:bg-zinc-800"
-                        >
-                            <FaDownload size={13} />
-                            Baixar arquivo
-                        </button>
-                    </div>
+                    <button
+                        type="button"
+                        onClick={handleClear}
+                        disabled={!file && !result}
+                        className="inline-flex items-center gap-2 rounded-full border border-black/10 px-5 py-3 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-40 hover:bg-stone-50 dark:border-white/10 dark:hover:bg-zinc-800"
+                    >
+                        <FaTrashAlt size={13} />
+                        Limpar
+                    </button>
                 </div>
+
+                {result && (
+                    <p className="text-sm text-slate-600 dark:text-zinc-400">
+                        Arquivo pronto: {formatBytes(result.size)}
+                    </p>
+                )}
             </div>
         </div>
     )

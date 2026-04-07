@@ -1,8 +1,8 @@
 export const profile = {
     name: "Leonnardo Serafim",
-    tagline: "Desenvolvedor em formação - Atualmente cursando Ciência da Computação.",
+    tagline: "Desenvolvedor focado em backend, APIs e organização de dados.",
     about:
-        "Bem-vindo, meu nome é Leonnardo! Esse portfólio reúne meus projetos, habilidades, estudos e minha evolução como desenvolvedor.",
+        "Sou estudante de Ciência da Computação e venho desenvolvendo projetos com foco em backend, integração de dados e aplicações web. Gosto de criar soluções organizadas, funcionais e com boa base técnica.",
     email: "leonnardo.serafim@proton.me",
     linkedin: "https://linkedin.com/in/leonnardo-serafim/",
     github: "https://github.com/leonnardosrfm",
@@ -29,7 +29,7 @@ export const socialLinks = [
     },
     {
         label: "Currículo",
-        href: "/curriculo.pdf",
+        href: "/Resume - Leonnardo Serafim.pdf",
         download: true,
         external: false,
         hoverLabel: "Baixar currículo",
@@ -41,14 +41,16 @@ export const projects = [
         title: "Portfólio Pessoal",
         description: "Site pessoal para mostrar meus projetos e habilidades.",
         tags: ["React", "Tailwind","JavaScript","UI"],
-        image: "/projects/portfolio.png",
+        image: "/Portfolio.png",
+        imageClassName: "object-cover",
         github: "https://github.com/leonnardosrfm/portfolio",
     },
     {
         title: "PokeData API",
         description: "API para consultar e organizar dados de Pokémon.",
         tags: ["Python", "FastAPI", "PostgreSQL"],
-        image: "/projects/pokedata.png",
+        image: "/PokedataAPI.png",
+        imageClassName: "object-cover object-center",
         github: "https://github.com/leonnardosrfm/pokedata-api",
     },
 ]

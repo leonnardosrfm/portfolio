@@ -19,7 +19,7 @@ export default function ProjectsSection() {
                             <img
                                 src={project.image}
                                 alt={project.title}
-                                className="h-72 w-full object-cover"
+                                className={`h-72 w-full ${project.imageClassName ?? "object-cover"}`}
                             />
                         </div>
 
