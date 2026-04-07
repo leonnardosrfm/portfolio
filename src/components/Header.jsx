@@ -1,8 +1,27 @@
 import { FaMoon, FaSun } from "react-icons/fa"
-import { profile } from "../data/site"
 
-export default function Header({ theme, toggleTheme }) {
+const navItemsByPage = {
+    home: [
+        { label: "Home", href: "#home" },
+        { label: "About", href: "#sobre" },
+        { label: "Skills", href: "#skills" },
+        { label: "Projects", href: "#projetos" },
+        { label: "Utilities", href: "/utilities/" },
+        { label: "Contact", href: "#contato" },
+    ],
+    utilities: [
+        { label: "Home", href: "/" },
+        { label: "About", href: "/#sobre" },
+        { label: "Skills", href: "/#skills" },
+        { label: "Projects", href: "/#projetos" },
+        { label: "Utilities", href: "/utilities/", current: true },
+        { label: "Contact", href: "/#contato" },
+    ],
+}
+
+export default function Header({ theme, toggleTheme, page = "home" }) {
     const circularText = `• Leonnardo • Leonnardo `
+    const navItems = navItemsByPage[page] ?? navItemsByPage.home
 
     return (
         <header className="border-b border-black/10 dark:border-white/10">
@@ -39,21 +58,19 @@ export default function Header({ theme, toggleTheme }) {
 
                 <div className="flex items-center gap-4">
                     <nav className="hidden gap-10 text-sm font-medium md:flex">
-                        <a href="#home" className="transition hover:opacity-60">
-                            Home
-                        </a>
-                        <a href="#sobre" className="transition hover:opacity-60">
-                            About
-                        </a>
-                        <a href="#skills" className="transition hover:opacity-60">
-                            Skills
-                        </a>
-                        <a href="#projetos" className="transition hover:opacity-60">
-                            Projects
-                        </a>
-                        <a href="#contato" className="transition hover:opacity-60">
-                            Contact
-                        </a>
+                        {navItems.map((item) => (
+                            <a
+                                key={item.label}
+                                href={item.href}
+                                className={`transition ${
+                                    item.current
+                                        ? "text-slate-950 dark:text-white"
+                                        : "hover:opacity-60"
+                                }`}
+                            >
+                                {item.label}
+                            </a>
+                        ))}
                     </nav>
 
                     <button

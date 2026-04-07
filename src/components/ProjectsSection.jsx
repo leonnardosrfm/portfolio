@@ -1,3 +1,4 @@
+import { FaGithub, FaExternalLinkAlt } from "react-icons/fa"
 import { projects } from "../data/site"
 
 export default function ProjectsSection() {
@@ -14,9 +15,13 @@ export default function ProjectsSection() {
             <div className="grid gap-10 md:grid-cols-2">
                 {projects.map((project) => (
                     <article key={project.title}>
-                        <div
-                            className={`mb-5 h-72 rounded-2xl border border-black/10 bg-gradient-to-br ${project.imageClass} dark:border-white/10 dark:from-zinc-800 dark:via-zinc-900 dark:to-zinc-800`}
-                        />
+                        <div className="mb-5 overflow-hidden rounded-2xl border border-black/10 dark:border-white/10">
+                            <img
+                                src={project.image}
+                                alt={project.title}
+                                className="h-72 w-full object-cover"
+                            />
+                        </div>
 
                         <h3 className="text-2xl font-semibold text-slate-900 dark:text-zinc-100">
                             {project.title}
@@ -37,23 +42,31 @@ export default function ProjectsSection() {
                             ))}
                         </div>
 
-                        <a
-                            href={project.link}
-                            className="mt-5 inline-block text-sm font-semibold underline underline-offset-4 dark:text-zinc-100"
-                        >
-                            Ver projeto
-                        </a>
+                        <div className="mt-5 flex flex-wrap gap-3">
+                            <a
+                                href={project.github}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2 rounded-full border border-black/10 px-4 py-2 text-sm font-medium transition hover:bg-white dark:border-white/10 dark:hover:bg-zinc-900"
+                            >
+                                <FaGithub size={14} />
+                                GitHub
+                            </a>
+
+                            {project.demo && (
+                                <a
+                                    href={project.demo}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-2 rounded-full border border-black/10 px-4 py-2 text-sm font-medium transition hover:bg-white dark:border-white/10 dark:hover:bg-zinc-900"
+                                >
+                                    <FaExternalLinkAlt size={12} />
+                                    Ver projeto
+                                </a>
+                            )}
+                        </div>
                     </article>
                 ))}
-            </div>
-
-            <div className="mt-14 text-center">
-                <a
-                    href="#"
-                    className="inline-flex rounded-full border border-black/10 px-6 py-3 text-sm font-medium transition hover:bg-white dark:border-white/10 dark:text-zinc-100 dark:hover:bg-zinc-900"
-                >
-                    Ver todos os projetos
-                </a>
             </div>
         </section>
     )

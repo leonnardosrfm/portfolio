@@ -38,20 +38,51 @@ export const socialLinks = [
 
 export const projects = [
     {
-        title: "Projeto 1",
-        description:
-            "Landing page moderna com foco em performance, responsividade e clareza visual.",
-        tags: ["React", "Tailwind", "UI"],
-        imageClass: "from-slate-200 via-white to-slate-100",
-        link: "#",
+        title: "Portfólio Pessoal",
+        description: "Site pessoal para mostrar meus projetos e habilidades.",
+        tags: ["React", "Tailwind","JavaScript","UI"],
+        image: "/projects/portfolio.png",
+        github: "https://github.com/leonnardosrfm/portfolio",
     },
     {
-        title: "Projeto 2",
-        description:
-            "Aplicação com consumo de API e interface limpa, pensada para boa experiência de uso.",
-        tags: ["JavaScript", "API", "Frontend"],
-        imageClass: "from-blue-100 via-slate-50 to-slate-200",
-        link: "#",
+        title: "PokeData API",
+        description: "API para consultar e organizar dados de Pokémon.",
+        tags: ["Python", "FastAPI", "PostgreSQL"],
+        image: "/projects/pokedata.png",
+        github: "https://github.com/leonnardosrfm/pokedata-api",
+    },
+]
+
+export const utilities = [
+    {
+        id: "image-converter",
+        title: "Conversor de Imagens",
+        supportedFormats: ["PNG", "JPG", "WebP"],
+    },
+    {
+        id: "pdf-converter",
+        title: "Imagem para PDF",
+        supportedFormats: ["PNG", "JPG", "WebP", "PDF"],
+    },
+    {
+        id: "pdf-to-word",
+        title: "PDF para Word",
+        supportedFormats: ["PDF", "DOC"],
+    },
+    {
+        id: "pdf-to-excel",
+        title: "PDF para Excel",
+        supportedFormats: ["PDF", "XLS"],
+    },
+    {
+        id: "pdf-editor",
+        title: "Editar PDF",
+        supportedFormats: ["PDF"],
+    },
+    {
+        id: "pdf-to-image",
+        title: "PDF para Imagem",
+        supportedFormats: ["PDF", "PNG", "JPG", "WebP"],
     },
 ]
 
@@ -77,7 +108,7 @@ export const skillCategories = [
         color: "amber",
         skills: [
             { name: "MongoDB", icon: "mongodb" },
-            { name: "MySQL", icon: "mysql" },
+            { name: "PostgreSQL", icon: "postgresql" },
         ],
     },
     {
