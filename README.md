@@ -17,25 +17,14 @@ Este projeto reúne minha apresentação profissional em uma landing page e uma 
 - PDF.js
 - JSZip
 
-## Funcionalidades
-
-### Portfólio
-
-- apresentação pessoal
-- seção de habilidades organizada por categorias
-- seção de projetos com imagens
-- links diretos para GitHub, LinkedIn, email e currículo
-- alternância entre tema claro e escuro
-- botão para copiar email
-
-### Utilities
+### Seção de Utilities
 
 - conversor de imagens
 - imagem para PDF
 - PDF para Word
 - PDF para Excel
 - PDF para imagem
-- edição básica de PDF
+- edição *bem* básica de PDF
 
 ## Como executar o projeto
 
