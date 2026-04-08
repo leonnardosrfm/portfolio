@@ -2,7 +2,7 @@ export const profile = {
     name: "Leonnardo Serafim",
     tagline: "Desenvolvedor focado em backend, APIs e organização de dados.",
     about:
-        "Sou estudante de Ciência da Computação e venho desenvolvendo projetos com foco em backend, integração de dados e aplicações web. Gosto de criar soluções organizadas, funcionais e com boa base técnica.",
+        "Sou estudante de Ciência da Computação e venho desenvolvendo projetos com foco em backend e integração de dados. Gosto de criar soluções que sejam realmente úteis e impactantes na vida do usuário. Atualmente, estou em busca de uma oportunidade de estágio para evoluir na prática e contribuir com projetos reais.",
     email: "leonnardo.serafim@proton.me",
     linkedin: "https://linkedin.com/in/leonnardo-serafim/",
     github: "https://github.com/leonnardosrfm",
