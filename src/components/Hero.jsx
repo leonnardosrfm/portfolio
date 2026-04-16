@@ -40,7 +40,7 @@ export default function Hero() {
                             target={item.external ? "_blank" : undefined}
                             rel={item.external ? "noopener noreferrer" : undefined}
                             download={item.download ? true : undefined}
-                            className="group flex h-11 w-11 items-center justify-start overflow-hidden rounded-full border border-black/10 bg-white/70 px-3 text-slate-700 transition-all duration-300 hover:w-[170px] hover:bg-white hover:text-slate-950 dark:border-white/10 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800 dark:hover:text-white"
+                            className="group flex h-11 w-11 items-center justify-start overflow-hidden rounded-xl border border-black/10 bg-white/70 px-3 text-slate-700 transition-all duration-300 hover:w-[170px] hover:bg-white hover:text-slate-950 dark:border-white/10 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800 dark:hover:text-white"
                         >
               <span className="flex min-w-[18px] items-center justify-center">
                 <Icon size={17} />

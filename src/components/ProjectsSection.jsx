@@ -7,7 +7,7 @@ export default function ProjectsSection() {
             <div className="mb-12 flex items-center gap-4">
                 <div className="h-px flex-1 bg-black/10 dark:bg-white/10" />
                 <h2 className="font-skills text-center text-5xl font-semibold tracking-tight text-slate-900 dark:text-zinc-50">
-                    Projects
+                    Projetos
                 </h2>
                 <div className="h-px flex-1 bg-black/10 dark:bg-white/10" />
             </div>
@@ -47,7 +47,7 @@ export default function ProjectsSection() {
                                 href={project.github}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-2 rounded-full border border-black/10 px-4 py-2 text-sm font-medium transition hover:bg-white dark:border-white/10 dark:hover:bg-zinc-900"
+                                className="inline-flex items-center gap-2 rounded-xl border border-black/10 px-4 py-2 text-sm font-medium transition hover:bg-white dark:border-white/10 dark:hover:bg-zinc-900"
                             >
                                 <FaGithub size={14} />
                                 GitHub
@@ -58,7 +58,7 @@ export default function ProjectsSection() {
                                     href={project.demo}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-2 rounded-full border border-black/10 px-4 py-2 text-sm font-medium transition hover:bg-white dark:border-white/10 dark:hover:bg-zinc-900"
+                                    className="inline-flex items-center gap-2 rounded-xl border border-black/10 px-4 py-2 text-sm font-medium transition hover:bg-white dark:border-white/10 dark:hover:bg-zinc-900"
                                 >
                                     <FaExternalLinkAlt size={12} />
                                     Ver projeto

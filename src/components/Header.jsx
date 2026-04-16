@@ -2,20 +2,20 @@ import { FaMoon, FaSun } from "react-icons/fa"
 
 const navItemsByPage = {
     home: [
-        { label: "Home", href: "#home" },
-        { label: "About", href: "#sobre" },
-        { label: "Skills", href: "#skills" },
-        { label: "Projects", href: "#projetos" },
-        { label: "Utilities", href: "/utilities/" },
-        { label: "Contact", href: "#contato" },
+        { label: "Início", href: "#home" },
+        { label: "Sobre", href: "#sobre" },
+        { label: "Habilidades", href: "#skills" },
+        { label: "Projetos", href: "#projetos" },
+        { label: "Utilidades", href: "/utilities/" },
+        { label: "Contato", href: "#contato" },
     ],
     utilities: [
-        { label: "Home", href: "/" },
-        { label: "About", href: "/#sobre" },
-        { label: "Skills", href: "/#skills" },
-        { label: "Projects", href: "/#projetos" },
-        { label: "Utilities", href: "/utilities/", current: true },
-        { label: "Contact", href: "/#contato" },
+        { label: "Início", href: "/" },
+        { label: "Sobre", href: "/#sobre" },
+        { label: "Habilidades", href: "/#skills" },
+        { label: "Projetos", href: "/#projetos" },
+        { label: "Utilidades", href: "/utilities/", current: true },
+        { label: "Contato", href: "/#contato" },
     ],
 }
 
@@ -77,7 +77,7 @@ export default function Header({ theme, toggleTheme, page = "home" }) {
                         type="button"
                         onClick={toggleTheme}
                         aria-label="Alternar tema"
-                        className="flex h-10 w-10 items-center justify-center rounded-full border border-black/10 bg-white text-slate-700 transition hover:bg-zinc-100 dark:border-white/10 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800"
+                        className="flex h-10 w-10 items-center justify-center rounded-xl border border-black/10 bg-white text-slate-700 transition hover:bg-zinc-100 dark:border-white/10 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800"
                     >
                         {theme === "light" ? <FaMoon size={12} /> : <FaSun size={14} />}
                     </button>

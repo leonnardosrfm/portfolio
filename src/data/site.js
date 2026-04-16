@@ -95,6 +95,9 @@ export const skillCategories = [
         skills: [
             { name: "Python", icon: "python" },
             { name: "C", icon: "c" },
+            { name: "JavaScript", icon: "javascript" },
+            { name: "HTML", icon: "html" },
+            { name: "CSS", icon: "css" },
         ],
     },
     {
@@ -103,6 +106,18 @@ export const skillCategories = [
         skills: [
             { name: "Django", icon: "django" },
             { name: "FastAPI", icon: "fastapi" },
+            { name: "React", icon: "react" },
+            { name: "Tailwind CSS", icon: "tailwind" },
+        ],
+    },
+    {
+        title: "Cloud & Ferramentas",
+        color: "violet",
+        skills: [
+            { name: "Git", icon: "git" },
+            { name: "AWS", icon: "aws" },
+            { name: "Oracle", icon: "oracle" },
+            { name: "Figma", icon: "figma" },
         ],
     },
     {
@@ -114,11 +129,11 @@ export const skillCategories = [
         ],
     },
     {
-        title: "Cloud & Ferramentas",
-        color: "violet",
+        title: "No/Low Code",
+        color: "teal",
         skills: [
-            { name: "Git", icon: "git" },
-            { name: "AWS", icon: "aws" },
+            { name: "Xano", icon: "xano" },
+            { name: "FlutterFlow", icon: "flutterflow" },
         ],
     },
     {

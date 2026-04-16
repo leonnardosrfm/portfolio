@@ -26,7 +26,7 @@ export default function ContactSection() {
             <div className="mb-12 flex items-center gap-4">
                 <div className="h-px flex-1 bg-black/10 dark:bg-white/10" />
                 <h2 className="font-skills text-center text-5xl font-semibold tracking-tight text-slate-900 dark:text-zinc-50">
-                    Contact
+                    Contato
                 </h2>
                 <div className="h-px flex-1 bg-black/10 dark:bg-white/10" />
             </div>
@@ -48,7 +48,7 @@ export default function ContactSection() {
                             onClick={handleCopyEmail}
                             aria-label="Copiar email"
                             title={copied ? "Copiado!" : "Copiar email"}
-                            className="flex h-9 w-9 items-center justify-center rounded-full border border-black/10 text-sm text-slate-700 transition hover:bg-white hover:text-slate-950 dark:border-white/10 dark:text-zinc-200 dark:hover:bg-zinc-900 dark:hover:text-white"
+                            className="flex h-9 w-9 items-center justify-center rounded-xl border border-black/10 text-sm text-slate-700 transition hover:bg-white hover:text-slate-950 dark:border-white/10 dark:text-zinc-200 dark:hover:bg-zinc-900 dark:hover:text-white"
                         >
                             <FaCopy size={14} />
                         </button>

@@ -14,7 +14,7 @@ export default function UtilitiesApp() {
                 <main className="mx-auto max-w-6xl px-6">
                     <section className="py-16">
                         <h1 className="font-serif text-4xl leading-tight text-slate-900 md:text-5xl dark:text-zinc-50">
-                            Utilities
+                            Utilidades
                         </h1>
                         <p className="mt-4 max-w-2xl text-base text-slate-600 dark:text-zinc-400">
                             Ferramentas simples para conversão e edição de arquivos.

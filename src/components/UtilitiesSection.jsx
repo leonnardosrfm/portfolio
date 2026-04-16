@@ -41,7 +41,7 @@ export default function UtilitiesSection({ standalone = false }) {
                 <div className="mb-12 flex items-center gap-4">
                     <div className="h-px flex-1 bg-black/10 dark:bg-white/10" />
                     <h2 className="font-skills text-center text-5xl font-semibold tracking-tight text-slate-900 dark:text-zinc-50">
-                        Utilities
+                        Utilidades
                     </h2>
                     <div className="h-px flex-1 bg-black/10 dark:bg-white/10" />
                 </div>

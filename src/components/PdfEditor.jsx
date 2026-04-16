@@ -290,7 +290,7 @@ export default function PdfEditor() {
                         type="button"
                         onClick={handleExport}
                         disabled={!file || !pdf || !pages.length || isLoading || isExporting}
-                        className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition disabled:cursor-not-allowed disabled:opacity-40 hover:bg-slate-800 dark:bg-zinc-100 dark:text-zinc-950 dark:hover:bg-white"
+                        className="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition disabled:cursor-not-allowed disabled:opacity-40 hover:bg-slate-800 dark:bg-zinc-100 dark:text-zinc-950 dark:hover:bg-white"
                     >
                         <FaWrench size={13} />
                         {isExporting ? "Aplicando edições..." : "Gerar PDF editado"}
@@ -300,7 +300,7 @@ export default function PdfEditor() {
                         type="button"
                         onClick={() => result && downloadUrl(result.url, result.name)}
                         disabled={!result}
-                        className="inline-flex items-center gap-2 rounded-full border border-black/10 px-5 py-3 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-40 hover:bg-stone-50 dark:border-white/10 dark:hover:bg-zinc-800"
+                        className="inline-flex items-center gap-2 rounded-xl border border-black/10 px-5 py-3 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-40 hover:bg-stone-50 dark:border-white/10 dark:hover:bg-zinc-800"
                     >
                         <FaDownload size={13} />
                         Baixar PDF
@@ -310,7 +310,7 @@ export default function PdfEditor() {
                         type="button"
                         onClick={handleClear}
                         disabled={!file && !result}
-                        className="inline-flex items-center gap-2 rounded-full border border-black/10 px-5 py-3 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-40 hover:bg-stone-50 dark:border-white/10 dark:hover:bg-zinc-800"
+                        className="inline-flex items-center gap-2 rounded-xl border border-black/10 px-5 py-3 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-40 hover:bg-stone-50 dark:border-white/10 dark:hover:bg-zinc-800"
                     >
                         <FaTrashAlt size={13} />
                         Limpar

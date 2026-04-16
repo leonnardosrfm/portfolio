@@ -10,7 +10,11 @@ import {
     FaChartBar,
     FaServer,
     FaRocket,
+    FaReact,
+    FaMobileAlt,
+    FaCloud,
 } from "react-icons/fa"
+import { SiCss, SiFigma, SiHtml5, SiJavascript, SiTailwindcss } from "react-icons/si"
 import { skillCategories } from "../data/site"
 
 const iconMap = {
@@ -18,12 +22,21 @@ const iconMap = {
     python: FaPython,
     c: FaCode,
     cpp: FaCode,
+    javascript: SiJavascript,
+    html: SiHtml5,
+    css: SiCss,
     mysql: FaDatabase,
     postgresql: FaDatabase,
     django: FaServer,
     fastapi: FaRocket,
+    react: FaReact,
+    tailwind: SiTailwindcss,
     mongodb: FaLeaf,
     aws: FaAws,
+    oracle: FaCloud,
+    figma: SiFigma,
+    xano: FaServer,
+    flutterflow: FaMobileAlt,
     ml: FaBrain,
     excel: FaFileExcel,
     powerbi: FaChartBar,
@@ -34,12 +47,21 @@ const iconColorMap = {
     python: "text-[#3776AB]",
     c: "text-[#A8B9CC]",
     cpp: "text-[#00599C]",
+    javascript: "text-[#F7DF1E]",
+    html: "text-[#E34F26]",
+    css: "text-[#1572B6]",
     mysql: "text-[#4479A1]",
     postgresql: "text-[#336791]",
     django: "text-[#092E20] dark:text-[#44B78B]",
     fastapi: "text-[#009688]",
+    react: "text-[#61DAFB]",
+    tailwind: "text-[#06B6D4]",
     mongodb: "text-[#47A248]",
     aws: "text-[#FF9900]",
+    oracle: "text-[#F80000]",
+    figma: "text-[#F24E1E]",
+    xano: "text-[#2563EB]",
+    flutterflow: "text-[#4F46E5]",
     ml: "text-[#F7931E]",
     excel: "text-[#217346]",
     powerbi: "text-[#F2C811]",
@@ -66,9 +88,13 @@ const categoryStyles = {
         badge: "border-zinc-300 bg-zinc-50 text-zinc-700 dark:border-white/10 dark:bg-zinc-900 dark:text-zinc-200",
         card: "hover:border-black/15 hover:bg-zinc-50/60 dark:hover:border-white/15 dark:hover:bg-zinc-900",
     },
+    teal: {
+        badge: "border-zinc-300 bg-zinc-50 text-zinc-700 dark:border-white/10 dark:bg-zinc-900 dark:text-zinc-200",
+        card: "hover:border-black/15 hover:bg-zinc-50/60 dark:hover:border-white/15 dark:hover:bg-zinc-900",
+    },
 }
 
-function CategoryBlock({ category, wide = false }) {
+function CategoryBlock({ category }) {
     const style = categoryStyles[category.color]
 
     return (
@@ -81,11 +107,7 @@ function CategoryBlock({ category, wide = false }) {
         </span>
             </div>
 
-            <div
-                className={`grid gap-4 ${
-                    wide ? "sm:grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-2"
-                }`}
-            >
+            <div className="grid grid-cols-[repeat(auto-fit,minmax(10.5rem,1fr))] gap-4">
                 {category.skills.map((skill) => {
                     const Icon = iconMap[skill.icon]
                     const iconColor = iconColorMap[skill.icon] ?? "text-slate-700 dark:text-zinc-200"
@@ -93,7 +115,7 @@ function CategoryBlock({ category, wide = false }) {
                     return (
                         <div
                             key={skill.name}
-                            className={`group rounded-2xl border border-black/10 bg-white px-5 py-6 transition duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-lg dark:border-white/10 dark:bg-zinc-900 ${style.card}`}
+                            className={`group min-h-28 rounded-2xl border border-black/10 bg-white px-5 py-6 transition duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-lg dark:border-white/10 dark:bg-zinc-900 ${style.card}`}
                         >
                             <div
                                 className={`mb-4 flex justify-center transition duration-300 group-hover:scale-110 ${iconColor}`}
@@ -113,32 +135,20 @@ function CategoryBlock({ category, wide = false }) {
 }
 
 export default function SkillsSection() {
-    const [languages, backend, database, cloud, dataBi] = skillCategories
-
     return (
         <section id="skills" className="pb-24">
             <div className="mb-12 flex items-center gap-4">
                 <div className="h-px flex-1 bg-black/10 dark:bg-white/10" />
                 <h2 className="font-skills text-center text-5xl font-semibold tracking-tight text-slate-900 dark:text-zinc-50">
-                    Skills
+                    Habilidades
                 </h2>
                 <div className="h-px flex-1 bg-black/10 dark:bg-white/10" />
             </div>
 
-            <div className="grid gap-10 lg:grid-cols-2">
-                <div className="space-y-10">
-                    <CategoryBlock category={languages} />
-                    <CategoryBlock category={backend} />
-                </div>
-
-                <div className="space-y-10">
-                    <CategoryBlock category={database} />
-                    <CategoryBlock category={cloud} />
-                </div>
-
-                <div className="lg:col-span-2">
-                    <CategoryBlock category={dataBi} wide />
-                </div>
+            <div className="space-y-10">
+                {skillCategories.map((category) => (
+                    <CategoryBlock key={category.title} category={category} />
+                ))}
             </div>
         </section>
     )
