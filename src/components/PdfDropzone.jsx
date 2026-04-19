@@ -1,5 +1,6 @@
 import { FaFilePdf, FaUpload } from "react-icons/fa"
 import { formatBytes } from "../lib/file-utils"
+import { getPdfUploadHint } from "../lib/upload-security"
 
 export default function PdfDropzone({
     inputRef,
@@ -59,7 +60,7 @@ export default function PdfDropzone({
                         <p className="mt-2 max-w-md text-sm leading-6 text-slate-600 dark:text-zinc-400">
                             {isLoading
                                 ? "Estou renderizando as páginas e extraindo o texto do arquivo."
-                                : "Ou clique para escolher um arquivo PDF do seu dispositivo."}
+                                : `${getPdfUploadHint()} Ou clique para escolher um arquivo PDF do seu dispositivo.`}
                         </p>
                     </>
                 )}

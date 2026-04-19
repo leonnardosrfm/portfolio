@@ -1,5 +1,11 @@
 import { useEffect, useRef, useState } from "react"
 import { FaDownload, FaExchangeAlt, FaImage, FaTrashAlt, FaUpload } from "react-icons/fa"
+import {
+    getImageUploadHint,
+    validateImageDimensions,
+    validateImageFile,
+} from "../lib/upload-security"
+import { downloadUrl, formatBytes } from "../lib/file-utils"
 
 const formats = [
     { label: "PNG", extension: "png", mime: "image/png" },
@@ -23,18 +29,6 @@ function getNextFormat(mime) {
     return formats[(currentIndex + 1) % formats.length]
 }
 
-function formatBytes(value) {
-    if (!value) {
-        return "0 KB"
-    }
-
-    const units = ["B", "KB", "MB", "GB"]
-    const index = Math.min(Math.floor(Math.log(value) / Math.log(1024)), units.length - 1)
-    const amount = value / 1024 ** index
-
-    return `${amount.toFixed(amount >= 10 || index === 0 ? 0 : 1)} ${units[index]}`
-}
-
 function buildFileName(fileName, extension) {
     const baseName = fileName.replace(/\.[^/.]+$/, "")
     return `${baseName}.${extension}`
@@ -47,13 +41,6 @@ function loadImage(source) {
         image.onerror = () => reject(new Error("Não foi possível carregar a imagem."))
         image.src = source
     })
-}
-
-function downloadFile(url, fileName) {
-    const link = document.createElement("a")
-    link.href = url
-    link.download = fileName
-    link.click()
 }
 
 export default function ImageConverter({ showTitle = true }) {
@@ -105,6 +92,13 @@ export default function ImageConverter({ showTitle = true }) {
             return
         }
 
+        const validationMessage = validateImageFile(nextFile)
+
+        if (validationMessage) {
+            setError(validationMessage)
+            return
+        }
+
         const previewUrl = URL.createObjectURL(nextFile)
 
         setError("")
@@ -114,9 +108,18 @@ export default function ImageConverter({ showTitle = true }) {
         setTargetMime(getNextFormat(nextFile.type).mime)
 
         try {
-            await loadImage(previewUrl)
-        } catch {
-            setError("Não foi possível ler esta imagem. Tente outro arquivo.")
+            const image = await loadImage(previewUrl)
+            const dimensionsMessage = validateImageDimensions(image, nextFile.name)
+
+            if (dimensionsMessage) {
+                throw new Error(dimensionsMessage)
+            }
+        } catch (error) {
+            setError(
+                error instanceof Error && error.message
+                    ? error.message
+                    : "Não foi possível ler esta imagem. Tente outro arquivo."
+            )
             setFile(null)
             setSourceUrl("")
         }
@@ -193,8 +196,12 @@ export default function ImageConverter({ showTitle = true }) {
                 url: URL.createObjectURL(blob),
                 format: outputFormat.label,
             })
-        } catch {
-            setError("A conversão falhou. Tente novamente com outra imagem.")
+        } catch (error) {
+            setError(
+                error instanceof Error && error.message
+                    ? error.message
+                    : "A conversão falhou. Tente novamente com outra imagem."
+            )
         } finally {
             setIsConverting(false)
         }
@@ -241,7 +248,7 @@ export default function ImageConverter({ showTitle = true }) {
                     <p className="mt-2 text-sm text-slate-600 dark:text-zinc-400">
                         {file
                             ? formatBytes(file.size)
-                            : "PNG, JPG ou WebP. Clique ou arraste o arquivo."}
+                            : `${getImageUploadHint()} Clique ou arraste o arquivo.`}
                     </p>
                 </button>
 
@@ -293,7 +300,7 @@ export default function ImageConverter({ showTitle = true }) {
 
                     <button
                         type="button"
-                        onClick={() => converted && downloadFile(converted.url, converted.name)}
+                        onClick={() => converted && downloadUrl(converted.url, converted.name)}
                         disabled={!converted}
                         className="inline-flex items-center gap-2 rounded-xl border border-black/10 px-5 py-3 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-40 hover:bg-stone-50 dark:border-white/10 dark:hover:bg-zinc-800"
                     >

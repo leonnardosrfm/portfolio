@@ -1,3 +1,5 @@
+import { validatePdfFile, validatePdfPageCount } from "./upload-security"
+
 let pdfModulePromise = null
 
 async function getPdfModule() {
@@ -32,10 +34,22 @@ export function isPdfFile(file) {
 }
 
 export async function loadPdfDocument(file) {
+    const fileValidationMessage = validatePdfFile(file)
+
+    if (fileValidationMessage) {
+        throw new Error(fileValidationMessage)
+    }
+
     const pdfModule = await getPdfModule()
     const data = new Uint8Array(await file.arrayBuffer())
     const task = pdfModule.getDocument({ data })
     const pdf = await task.promise
+    const pageValidationMessage = validatePdfPageCount(pdf.numPages)
+
+    if (pageValidationMessage) {
+        pdf.destroy?.()
+        throw new Error(pageValidationMessage)
+    }
 
     return { pdf }
 }

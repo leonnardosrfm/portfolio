@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { extractPageText, isPdfFile, loadPdfDocument } from "../lib/pdf-utils"
+import { validatePdfFile } from "../lib/upload-security"
 
 function cleanupDocument(documentState) {
     if (!documentState) {
@@ -24,6 +25,13 @@ export default function usePdfDocument() {
 
         if (!isPdfFile(file)) {
             setError("Envie um arquivo PDF válido.")
+            return
+        }
+
+        const validationMessage = validatePdfFile(file)
+
+        if (validationMessage) {
+            setError(validationMessage)
             return
         }
 
@@ -56,9 +64,13 @@ export default function usePdfDocument() {
                 pdf: loaded.pdf,
                 pages,
             })
-        } catch {
+        } catch (error) {
             setDocumentState(null)
-            setError("Não foi possível ler este PDF. Tente outro arquivo.")
+            setError(
+                error instanceof Error && error.message
+                    ? error.message
+                    : "Não foi possível ler este PDF. Tente outro arquivo."
+            )
         } finally {
             setIsLoading(false)
         }

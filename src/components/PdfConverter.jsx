@@ -1,20 +1,16 @@
 import { useEffect, useRef, useState } from "react"
 import { jsPDF } from "jspdf"
 import { FaDownload, FaFilePdf, FaTrashAlt, FaUpload } from "react-icons/fa"
+import { downloadUrl, formatBytes } from "../lib/file-utils"
+import {
+    getImageBatchHint,
+    getImageUploadHint,
+    validateImageBatch,
+    validateImageDimensions,
+    validateImageFile,
+} from "../lib/upload-security"
 
 const acceptedTypes = new Set(["image/png", "image/jpeg", "image/webp"])
-
-function formatBytes(value) {
-    if (!value) {
-        return "0 KB"
-    }
-
-    const units = ["B", "KB", "MB", "GB"]
-    const index = Math.min(Math.floor(Math.log(value) / Math.log(1024)), units.length - 1)
-    const amount = value / 1024 ** index
-
-    return `${amount.toFixed(amount >= 10 || index === 0 ? 0 : 1)} ${units[index]}`
-}
 
 function readDataUrl(file) {
     return new Promise((resolve, reject) => {
@@ -40,13 +36,6 @@ function buildPdfName(files) {
     }
 
     return "imagens.pdf"
-}
-
-function downloadFile(url, fileName) {
-    const link = document.createElement("a")
-    link.href = url
-    link.download = fileName
-    link.click()
 }
 
 export default function PdfConverter() {
@@ -90,17 +79,35 @@ export default function PdfConverter() {
             return
         }
 
+        const batchValidationMessage = validateImageBatch(nextFiles)
+
+        if (batchValidationMessage) {
+            setError(batchValidationMessage)
+            return
+        }
+
         setError("")
         setPdfFile(null)
 
         try {
             const preparedItems = await Promise.all(
                 nextFiles.map(async (file) => {
+                    const fileValidationMessage = validateImageFile(file)
+
+                    if (fileValidationMessage) {
+                        throw new Error(fileValidationMessage)
+                    }
+
                     const sourceUrl = URL.createObjectURL(file)
 
                     try {
                         const dataUrl = await readDataUrl(file)
                         const image = await loadImage(sourceUrl)
+                        const dimensionsMessage = validateImageDimensions(image, file.name)
+
+                        if (dimensionsMessage) {
+                            throw new Error(dimensionsMessage)
+                        }
 
                         return {
                             file,
@@ -115,8 +122,12 @@ export default function PdfConverter() {
             )
 
             setItems(preparedItems)
-        } catch {
-            setError("Não foi possível preparar os arquivos selecionados.")
+        } catch (error) {
+            setError(
+                error instanceof Error && error.message
+                    ? error.message
+                    : "Não foi possível preparar os arquivos selecionados."
+            )
         }
     }
 
@@ -220,7 +231,7 @@ export default function PdfConverter() {
                     <p className="mt-2 text-sm text-slate-600 dark:text-zinc-400">
                         {items.length
                             ? items.map((item) => item.file.name).join(", ")
-                            : "PNG, JPG ou WebP. Clique ou arraste os arquivos."}
+                            : `${getImageUploadHint()} ${getImageBatchHint()} Clique ou arraste os arquivos.`}
                     </p>
                 </button>
 
@@ -243,7 +254,7 @@ export default function PdfConverter() {
 
                     <button
                         type="button"
-                        onClick={() => pdfFile && downloadFile(pdfFile.url, pdfFile.name)}
+                        onClick={() => pdfFile && downloadUrl(pdfFile.url, pdfFile.name)}
                         disabled={!pdfFile}
                         className="inline-flex items-center gap-2 rounded-xl border border-black/10 px-5 py-3 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-40 hover:bg-stone-50 dark:border-white/10 dark:hover:bg-zinc-800"
                     >
