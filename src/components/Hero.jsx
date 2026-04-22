@@ -1,4 +1,4 @@
-import { FaLinkedinIn, FaGithub, FaEnvelope, FaFileAlt } from "react-icons/fa"
+import { FaEnvelope, FaFileAlt, FaGithub, FaLinkedinIn } from "react-icons/fa"
 import { profile, socialLinks } from "../data/site"
 
 const iconMap = {
@@ -10,48 +10,58 @@ const iconMap = {
 
 export default function Hero() {
     return (
-        <section id="home" className="py-24 text-center">
-            <h1 className="font-serif text-5xl leading-tight text-slate-900 md:text-7xl dark:text-zinc-50">
-                {profile.name}
-            </h1>
+        <section id="home" className="py-16 md:py-24">
+            <div className="mx-auto grid max-w-6xl items-start gap-10 lg:grid-cols-[minmax(0,0.82fr)_300px] xl:grid-cols-[minmax(0,0.84fr)_320px]">
+                <div className="max-w-2xl text-left">
+                    <h1 className="font-serif text-[clamp(2.8rem,5.4vw,4.5rem)] leading-[1.04] tracking-[-0.04em] text-[color:var(--text)]">
+                        {profile.name}
+                    </h1>
 
-            <p className="mt-3 font-serif text-xl text-slate-700 md:text-2xl dark:text-zinc-400">
-                {profile.tagline}
-            </p>
+                    <p className="mt-4 max-w-2xl text-[clamp(1.05rem,2.2vw,1.45rem)] leading-[1.5] text-[color:var(--text)]">
+                        {profile.tagline}
+                    </p>
 
-            <div id="sobre" className="mx-auto mt-12 max-w-3xl">
-                <p className="font-clean text-lg leading-8 text-slate-700 dark:text-zinc-300">
-                    {profile.about}
-                </p>
-            </div>
+                    <p
+                        id="sobre"
+                        className="mt-10 max-w-2xl text-[15px] leading-8 text-[color:var(--muted)] md:text-[17px]"
+                    >
+                        {profile.about}
+                    </p>
 
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-                {socialLinks.map((item) => {
-                    const Icon = iconMap[item.label]
+                    <div className="mt-10 flex flex-wrap justify-start gap-3">
+                        {socialLinks.map((item) => {
+                            const Icon = iconMap[item.label]
 
-                    if (!Icon) return null
+                            if (!Icon) return null
 
-                    return (
-                        <a
-                            key={item.label}
-                            href={item.href}
-                            aria-label={item.label}
-                            title={item.hoverLabel}
-                            target={item.external ? "_blank" : undefined}
-                            rel={item.external ? "noopener noreferrer" : undefined}
-                            download={item.download ? true : undefined}
-                            className="group flex h-11 w-11 items-center justify-start overflow-hidden rounded-xl border border-black/10 bg-white/70 px-3 text-slate-700 transition-all duration-300 hover:w-[170px] hover:bg-white hover:text-slate-950 dark:border-white/10 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800 dark:hover:text-white"
-                        >
-              <span className="flex min-w-[18px] items-center justify-center">
-                <Icon size={17} />
-              </span>
+                            return (
+                                <a
+                                    key={item.label}
+                                    href={item.href}
+                                    aria-label={item.hoverLabel}
+                                    title={item.hoverLabel}
+                                    target={item.external ? "_blank" : undefined}
+                                    rel={item.external ? "noopener noreferrer" : undefined}
+                                    download={item.download ? true : undefined}
+                                    className="inline-flex min-h-11 items-center gap-2 rounded-[0.9rem] border border-[color:var(--line)] px-4 text-sm font-medium text-[color:var(--muted)] transition hover:border-[color:var(--line-strong)] hover:text-[color:var(--text)] hover:bg-black/3 dark:hover:bg-white/3"
+                                >
+                                    <Icon size={16} />
+                                    <span>{item.hoverLabel}</span>
+                                </a>
+                            )
+                        })}
+                    </div>
+                </div>
 
-                            <span className="ml-0 w-0 overflow-hidden whitespace-nowrap text-left text-sm font-medium opacity-0 transition-all duration-300 group-hover:ml-3 group-hover:w-[110px] group-hover:opacity-100">
-                {item.hoverLabel}
-              </span>
-                        </a>
-                    )
-                })}
+                <div className="mx-auto w-full max-w-[300px] lg:mx-0 lg:justify-self-end">
+                    <div className="aspect-square overflow-hidden rounded-[1.8rem] border border-[color:var(--line)] bg-[color:var(--bg-soft)] p-2.5 shadow-[0_24px_60px_rgba(15,23,42,0.08)] dark:shadow-none">
+                        <img
+                            src="/ProfileExample.png"
+                            alt="Exemplo de foto para o portfólio"
+                            className="h-full w-full rounded-[1.35rem] object-cover"
+                        />
+                    </div>
+                </div>
             </div>
         </section>
     )

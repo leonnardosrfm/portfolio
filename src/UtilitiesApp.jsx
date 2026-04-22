@@ -7,25 +7,25 @@ export default function UtilitiesApp() {
     const { theme, toggleTheme } = useTheme()
 
     return (
-        <div className={theme === "dark" ? "dark" : ""}>
-            <div className="min-h-screen bg-stone-50 text-slate-900 transition-colors duration-300 dark:bg-zinc-950 dark:text-zinc-100">
-                <Header theme={theme} toggleTheme={toggleTheme} page="utilities" />
+        <div className="min-h-screen text-[color:var(--text)] transition-colors duration-300">
+            <Header theme={theme} toggleTheme={toggleTheme} page="utilities" />
 
-                <main className="mx-auto max-w-6xl px-6">
-                    <section className="py-16">
-                        <h1 className="font-serif text-4xl leading-tight text-slate-900 md:text-5xl dark:text-zinc-50">
-                            Utilidades
-                        </h1>
-                        <p className="mt-4 max-w-2xl text-base text-slate-600 dark:text-zinc-400">
-                            Ferramentas simples para conversão e edição de arquivos.
-                        </p>
-                    </section>
+            <main className="mx-auto max-w-7xl px-5 md:px-8">
+                <section className="section-shell pt-16 text-center md:pt-20">
+                    <span className="section-kicker">Workspace</span>
+                    <h1 className="section-title mx-auto max-w-3xl">
+                        Um conjunto enxuto de utilidades para arquivos do dia a dia.
+                    </h1>
+                    <p className="section-lead mx-auto mt-6">
+                        Conversão, edição leve e manipulação de PDF e imagem no próprio
+                        navegador, com uma interface mais organizada e direta.
+                    </p>
+                </section>
 
-                    <UtilitiesSection standalone />
-                </main>
+                <UtilitiesSection standalone />
+            </main>
 
-                <Footer />
-            </div>
+            <Footer />
         </div>
     )
 }

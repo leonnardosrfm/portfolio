@@ -10,19 +10,17 @@ export default function App() {
     const { theme, toggleTheme } = useTheme()
 
     return (
-        <div className={theme === "dark" ? "dark" : ""}>
-            <div className="min-h-screen bg-stone-50 text-slate-900 transition-colors duration-300 dark:bg-zinc-950 dark:text-zinc-100">
-                <Header theme={theme} toggleTheme={toggleTheme} page="home" />
+        <div className="min-h-screen text-[color:var(--text)] transition-colors duration-300">
+            <Header theme={theme} toggleTheme={toggleTheme} page="home" />
 
-                <main className="mx-auto max-w-6xl px-6">
-                    <Hero />
-                    <SkillsSection />
-                    <ProjectsSection />
-                    <ContactSection />
-                </main>
+            <main className="mx-auto max-w-7xl px-5 md:px-8">
+                <Hero />
+                <SkillsSection />
+                <ProjectsSection />
+                <ContactSection />
+            </main>
 
-                <Footer />
-            </div>
+            <Footer />
         </div>
     )
 }

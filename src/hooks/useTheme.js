@@ -11,6 +11,10 @@ export default function useTheme() {
 
     useEffect(() => {
         localStorage.setItem("theme", theme)
+
+        if (typeof document !== "undefined") {
+            document.documentElement.classList.toggle("dark", theme === "dark")
+        }
     }, [theme])
 
     function toggleTheme() {

@@ -1,29 +1,123 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:wght@500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Lora:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-@keyframes spin-slow {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+:root {
+    color-scheme: light;
+    --bg: oklch(96.7% 0.003 264.542);
+    --header-bg: oklch(95.3% 0.004 264.542);
+    --bg-soft: #fcfaf6;
+    --text: #171717;
+    --muted: #666157;
+    --line: rgba(23, 23, 23, 0.08);
+    --line-strong: rgba(23, 23, 23, 0.14);
+    --panel: rgba(255, 255, 255, 0.7);
+    --accent: #be5a35;
+    --accent-soft: rgba(190, 90, 53, 0.1);
 }
 
-.spin-slow {
-    animation: spin-slow 14s linear infinite;
+.dark {
+    color-scheme: dark;
+    --bg: #111314;
+    --header-bg: #151819;
+    --bg-soft: #171a1b;
+    --text: #f5f1e8;
+    --muted: #b4ada1;
+    --line: rgba(255, 255, 255, 0.08);
+    --line-strong: rgba(255, 255, 255, 0.14);
+    --panel: rgba(255, 255, 255, 0.04);
+    --accent: #eb8d63;
+    --accent-soft: rgba(235, 141, 99, 0.12);
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-    font-family: "Inter", sans-serif;
+    font-family: "Manrope", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+::selection {
+    background: var(--accent);
+    color: #fff;
 }
 
 .font-clean {
-    font-family: "Inter", sans-serif;
+    font-family: "Manrope", sans-serif;
 }
 
-.font-skills {
-    font-family: "Cormorant Garamond", serif;
+.font-skills,
+.font-display {
+    font-family: "Manrope", sans-serif;
+}
+
+.font-elegant {
+    font-family: "Lora", Georgia, serif;
+}
+
+.section-shell {
+    padding-block: 4rem;
+    border-top: 1px solid var(--line);
+}
+
+.section-title {
+    font-family: "Lora", Georgia, serif;
+    font-size: clamp(1.9rem, 4.4vw, 3.4rem);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    font-weight: 600;
+}
+
+.section-kicker {
+    display: inline-block;
+    font-size: 0.95rem;
+    font-family: "Lora", Georgia, serif;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.section-lead {
+    max-width: 38rem;
+    color: var(--muted);
+    line-height: 1.75;
+}
+
+.soft-panel {
+    border: 1px solid var(--line);
+    background: var(--panel);
+    backdrop-filter: blur(10px);
+}
+
+.ghost-panel {
+    border: 1px solid var(--line);
+    background: transparent;
+}
+
+.pill-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    border-radius: 999px;
+    padding: 0.78rem 1.1rem;
+    font-size: 0.92rem;
+    font-weight: 700;
+    transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+.pill-primary {
+    background: var(--text);
+    color: var(--bg-soft);
+}
+
+.pill-secondary {
+    border: 1px solid var(--line-strong);
+    background: transparent;
+    color: var(--text);
 }
