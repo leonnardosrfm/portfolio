@@ -1,69 +1,69 @@
-import { FaGithub, FaExternalLinkAlt } from "react-icons/fa"
+import { FaExternalLinkAlt, FaGithub } from "react-icons/fa"
 import { projects } from "../data/site"
 
 export default function ProjectsSection() {
     return (
-        <section id="projetos" className="pb-24">
-            <div className="mb-12 flex items-center gap-4">
-                <div className="h-px flex-1 bg-black/10 dark:bg-white/10" />
-                <h2 className="font-skills text-center text-5xl font-semibold tracking-tight text-slate-900 dark:text-zinc-50">
-                    Projetos
-                </h2>
-                <div className="h-px flex-1 bg-black/10 dark:bg-white/10" />
+        <section id="projetos" className="section-shell">
+            <div className="text-center">
+                <p className="section-kicker">Projetos</p>
             </div>
 
-            <div className="grid gap-10 md:grid-cols-2">
+            <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
                 {projects.map((project) => (
-                    <article key={project.title}>
-                        <div className="mb-5 overflow-hidden rounded-2xl border border-black/10 dark:border-white/10">
+                    <article
+                        key={project.title}
+                        className="flex h-full flex-col rounded-[1.2rem] border border-[color:var(--line)]"
+                    >
+                        <div className="overflow-hidden rounded-t-[1.2rem]">
                             <img
                                 src={project.image}
                                 alt={project.title}
-                                className={`h-72 w-full ${project.imageClassName ?? "object-cover"}`}
+                                className={`h-52 w-full ${project.imageClassName ?? "object-cover"}`}
                             />
                         </div>
 
-                        <h3 className="text-2xl font-semibold text-slate-900 dark:text-zinc-100">
-                            {project.title}
-                        </h3>
+                        <div className="flex flex-1 flex-col p-5 text-center">
+                            <h3 className="text-[1.7rem] font-semibold tracking-[-0.04em] text-[color:var(--text)]">
+                                {project.title}
+                            </h3>
+                            <p className="mx-auto mt-3 max-w-2xl text-[15px] leading-7 text-[color:var(--muted)] md:text-base">
+                                {project.description}
+                            </p>
 
-                        <p className="mt-3 text-base leading-7 text-slate-700 dark:text-zinc-300">
-                            {project.description}
-                        </p>
+                            <div className="mt-4 flex flex-wrap justify-center gap-2">
+                                {project.tags.map((tag) => (
+                                    <span
+                                        key={tag}
+                                        className="rounded-full border border-[color:var(--line)] px-3 py-1 text-xs font-medium text-[color:var(--muted)]"
+                                    >
+                                        {tag}
+                                    </span>
+                                ))}
+                            </div>
 
-                        <div className="mt-4 flex flex-wrap gap-2">
-                            {project.tags.map((tag) => (
-                                <span
-                                    key={tag}
-                                    className="rounded-full border border-black/10 px-3 py-1 text-sm text-slate-600 dark:border-white/10 dark:text-zinc-300"
-                                >
-                  {tag}
-                </span>
-                            ))}
-                        </div>
-
-                        <div className="mt-5 flex flex-wrap gap-3">
-                            <a
-                                href={project.github}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-2 rounded-xl border border-black/10 px-4 py-2 text-sm font-medium transition hover:bg-white dark:border-white/10 dark:hover:bg-zinc-900"
-                            >
-                                <FaGithub size={14} />
-                                GitHub
-                            </a>
-
-                            {project.demo && (
+                            <div className="mt-5 flex flex-wrap justify-center gap-5 text-sm font-semibold">
                                 <a
-                                    href={project.demo}
+                                    href={project.github}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-2 rounded-xl border border-black/10 px-4 py-2 text-sm font-medium transition hover:bg-white dark:border-white/10 dark:hover:bg-zinc-900"
+                                    className="inline-flex items-center gap-2 text-[color:var(--muted)] transition hover:text-[color:var(--text)]"
                                 >
-                                    <FaExternalLinkAlt size={12} />
-                                    Ver projeto
+                                    <FaGithub size={14} />
+                                    GitHub
                                 </a>
-                            )}
+
+                                {project.demo && (
+                                    <a
+                                        href={project.demo}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center gap-2 text-[color:var(--muted)] transition hover:text-[color:var(--text)]"
+                                    >
+                                        <FaExternalLinkAlt size={12} />
+                                        Ver projeto
+                                    </a>
+                                )}
+                            </div>
                         </div>
                     </article>
                 ))}

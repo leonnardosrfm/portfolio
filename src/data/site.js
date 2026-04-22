@@ -40,7 +40,7 @@ export const projects = [
     {
         title: "Portfólio Pessoal",
         description: "Site pessoal para mostrar meus projetos e habilidades.",
-        tags: ["React", "Tailwind","JavaScript","UI"],
+        tags: ["React", "Tailwind", "JavaScript", "UI"],
         image: "/Portfolio.png",
         imageClassName: "object-cover",
         github: "https://github.com/leonnardosrfm/portfolio",
@@ -52,6 +52,15 @@ export const projects = [
         image: "/PokedataAPI.png",
         imageClassName: "object-cover object-center",
         github: "https://github.com/leonnardosrfm/pokedata-api",
+    },
+    {
+        title: "Bot Discord",
+        description:
+            "Bot público em PT-BR com comandos utilitários, clima, música, TTS e leitura automática de mensagens.",
+        tags: ["Python", "discord.py", "TTS", "Slash Commands"],
+        image: "/DiscordBot.svg",
+        imageClassName: "object-cover",
+        github: "https://github.com/leonnardosrfm/bot-discord",
     },
 ]
 

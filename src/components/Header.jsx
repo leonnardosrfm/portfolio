@@ -1,4 +1,5 @@
-import { FaMoon, FaSun } from "react-icons/fa"
+import { useState } from "react"
+import { FaBars, FaMoon, FaSun, FaTimes } from "react-icons/fa"
 
 const navItemsByPage = {
     home: [
@@ -20,52 +21,32 @@ const navItemsByPage = {
 }
 
 export default function Header({ theme, toggleTheme, page = "home" }) {
-    const circularText = `• Leonnardo • Leonnardo `
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
     const navItems = navItemsByPage[page] ?? navItemsByPage.home
 
     return (
-        <header className="border-b border-black/10 dark:border-white/10">
-            <div className="mx-auto flex max-w-[90rem] items-center justify-between px-6 py-5">
-                <div className="relative h-14 w-14">
-                    <svg
-                        viewBox="0 0 120 120"
-                        className="spin-slow h-full w-full text-slate-700 dark:text-zinc-300"
-                        aria-hidden="true"
-                    >
-                        <defs>
-                            <path
-                                id="circlePath"
-                                d="
-                  M 60,60
-                  m -42,0
-                  a 42,42 0 1,1 84,0
-                  a 42,42 0 1,1 -84,0
-                "
-                            />
-                        </defs>
+        <header className="sticky top-0 z-40 border-b border-[color:var(--line)] bg-[color:var(--header-bg)]/92 backdrop-blur">
+            <div className="mx-auto max-w-6xl px-5 py-3.5 md:px-8">
+                <div className="flex items-center justify-between gap-6">
+                    <a href={page === "home" ? "#home" : "/"} className="min-w-0">
+                        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--muted)]">
+                            Portfolio
+                        </p>
+                        <p className="mt-0.5 flex items-center gap-2 truncate text-[15px] font-semibold text-[color:var(--text)]">
+                            <span className="font-mono text-[13px] text-[color:var(--accent)]">&lt;/&gt;</span>
+                            <span>Leonnardo Serafim</span>
+                        </p>
+                    </a>
 
-                        <text
-                            fill="currentColor"
-                            className="text-[13.5px] tracking-[3px] uppercase"
-                        >
-                            <textPath href="#circlePath" startOffset="0%">
-                                {circularText}
-                            </textPath>
-                        </text>
-                    </svg>
-
-                </div>
-
-                <div className="flex flex-1 items-center justify-end">
-                    <nav className="hidden items-center gap-10 text-sm font-medium md:flex">
+                    <nav className="hidden items-center gap-5 lg:flex">
                         {navItems.map((item) => (
                             <a
                                 key={item.label}
                                 href={item.href}
-                                className={`transition ${
+                                className={`text-sm font-medium transition ${
                                     item.current
-                                        ? "text-slate-950 dark:text-white"
-                                        : "hover:opacity-60"
+                                        ? "text-[color:var(--text)]"
+                                        : "text-[color:var(--muted)] hover:text-[color:var(--text)]"
                                 }`}
                             >
                                 {item.label}
@@ -73,15 +54,45 @@ export default function Header({ theme, toggleTheme, page = "home" }) {
                         ))}
                     </nav>
 
-                    <button
-                        type="button"
-                        onClick={toggleTheme}
-                        aria-label="Alternar tema"
-                        className="ml-6 flex h-10 w-10 items-center justify-center rounded-xl border border-black/10 bg-white text-slate-700 transition hover:bg-zinc-100 md:ml-16 dark:border-white/10 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800"
-                    >
-                        {theme === "light" ? <FaMoon size={12} /> : <FaSun size={14} />}
-                    </button>
+                    <div className="flex items-center gap-2">
+                        <button
+                            type="button"
+                            onClick={toggleTheme}
+                            aria-label="Alternar tema"
+                            className="flex h-9 w-9 items-center justify-center rounded-full border border-[color:var(--line)] text-[color:var(--text)] transition hover:bg-black/5 dark:hover:bg-white/6"
+                        >
+                            {theme === "light" ? <FaMoon size={13} /> : <FaSun size={14} />}
+                        </button>
+
+                        <button
+                            type="button"
+                            onClick={() => setIsMenuOpen((prev) => !prev)}
+                            aria-label="Abrir menu"
+                            className="flex h-9 w-9 items-center justify-center rounded-full border border-[color:var(--line)] text-[color:var(--text)] transition hover:bg-black/5 lg:hidden dark:hover:bg-white/6"
+                        >
+                            {isMenuOpen ? <FaTimes size={14} /> : <FaBars size={14} />}
+                        </button>
+                    </div>
                 </div>
+
+                {isMenuOpen && (
+                    <nav className="mt-4 grid gap-2 border-t border-[color:var(--line)] pt-4 lg:hidden">
+                        {navItems.map((item) => (
+                            <a
+                                key={item.label}
+                                href={item.href}
+                                onClick={() => setIsMenuOpen(false)}
+                                className={`rounded-lg px-2 py-2 text-sm font-medium transition ${
+                                    item.current
+                                        ? "text-[color:var(--text)]"
+                                        : "text-[color:var(--muted)] hover:text-[color:var(--text)]"
+                                }`}
+                            >
+                                {item.label}
+                            </a>
+                        ))}
+                    </nav>
+                )}
             </div>
         </header>
     )

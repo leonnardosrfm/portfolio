@@ -10,9 +10,9 @@ const PdfToWordConverter = lazy(() => import("./PdfToWordConverter"))
 
 function UtilityPanelFallback() {
     return (
-        <div className="rounded-[1.5rem] border border-black/10 bg-white p-6 dark:border-white/10 dark:bg-zinc-900">
-            <div className="flex min-h-64 flex-col justify-center rounded-[1rem] border border-dashed border-black/10 bg-stone-50 px-6 py-10 text-center dark:border-white/10 dark:bg-zinc-950">
-                <p className="text-lg font-semibold text-slate-900 dark:text-zinc-50">
+        <div className="rounded-[1rem] border border-[color:var(--line)] p-5">
+            <div className="flex min-h-64 flex-col justify-center rounded-[0.85rem] border border-dashed border-[color:var(--line)] px-6 py-10 text-center">
+                <p className="text-lg font-semibold text-[color:var(--text)]">
                     Carregando utilitário...
                 </p>
             </div>
@@ -36,32 +36,47 @@ export default function UtilitiesSection({ standalone = false }) {
     const SelectedComponent = componentMap[selectedUtility.id] ?? ImageConverter
 
     return (
-        <section id="utilidades" className="pb-24">
+        <section id="utilidades" className={standalone ? "pb-24" : "section-shell"}>
             {!standalone && (
-                <div className="mb-12 flex items-center gap-4">
-                    <div className="h-px flex-1 bg-black/10 dark:bg-white/10" />
-                    <h2 className="font-skills text-center text-5xl font-semibold tracking-tight text-slate-900 dark:text-zinc-50">
-                        Utilidades
+                <>
+                    <span className="section-kicker">Utilidades</span>
+                    <h2 className="section-title mt-4 max-w-3xl">
+                        Ferramentas úteis, acessíveis e prontas para uso direto no navegador.
                     </h2>
-                    <div className="h-px flex-1 bg-black/10 dark:bg-white/10" />
-                </div>
+                    <p className="section-lead mt-6">
+                        Mantive a ideia original das utilities, mas trouxe uma organização mais
+                        clara para facilitar descoberta e uso.
+                    </p>
+                </>
             )}
 
-            <div className="grid gap-6 lg:grid-cols-[14rem_minmax(0,1fr)] lg:items-start">
-                <div className="rounded-[1.5rem] border border-black/10 bg-white p-3 dark:border-white/10 dark:bg-zinc-900">
+            <div className={`grid gap-6 lg:grid-cols-[16rem_minmax(0,1fr)] lg:items-start ${standalone ? "" : "mt-10"}`}>
+                <div className="rounded-[1rem] border border-[color:var(--line)] p-4">
+                    <div className="mb-4 px-1">
+                        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">
+                            Ferramentas
+                        </p>
+                        <p className="mt-2 text-sm leading-6 text-[color:var(--muted)]">
+                            Selecione um fluxo para abrir o painel principal.
+                        </p>
+                    </div>
+
                     <div className="space-y-2">
                         {utilities.map((utility) => (
                             <button
                                 key={utility.id}
                                 type="button"
                                 onClick={() => setSelectedId(utility.id)}
-                                className={`w-full rounded-[1rem] border px-3 py-3 text-left transition ${
+                                className={`w-full rounded-[0.85rem] border px-3.5 py-3.5 text-left transition ${
                                     selectedUtility.id === utility.id
-                                        ? "border-slate-900 bg-slate-900 text-white dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-950"
-                                        : "border-black/10 bg-white text-slate-900 hover:bg-stone-50 dark:border-white/10 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800"
+                                        ? "border-[color:var(--line-strong)] bg-[color:var(--accent-soft)] text-[color:var(--text)]"
+                                        : "border-[color:var(--line)] text-[color:var(--text)] hover:bg-black/3 dark:hover:bg-white/3"
                                 }`}
                             >
                                 <p className="text-sm font-semibold">{utility.title}</p>
+                                <p className="mt-2 text-xs text-[color:var(--muted)]">
+                                    {utility.supportedFormats.join(" • ")}
+                                </p>
                             </button>
                         ))}
                     </div>
