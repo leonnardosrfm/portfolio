@@ -26,14 +26,14 @@ export default function Header({ theme, toggleTheme, page = "home" }) {
 
     return (
         <header className="sticky top-0 z-40 border-b border-[color:var(--line)] bg-[color:var(--header-bg)]/92 backdrop-blur">
-            <div className="mx-auto max-w-6xl px-5 py-3.5 md:px-8">
+            <div className="mx-auto max-w-6xl px-6 py-4 md:px-8">
                 <div className="flex items-center justify-between gap-6">
                     <a href={page === "home" ? "#home" : "/"} className="min-w-0">
                         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--muted)]">
                             Portfolio
                         </p>
-                        <p className="mt-0.5 flex items-center gap-2 truncate text-[15px] font-semibold text-[color:var(--text)]">
-                            <span className="font-mono text-[13px] text-[color:var(--accent)]">&lt;/&gt;</span>
+                        <p className="mt-1 flex items-center gap-2 truncate text-base font-semibold text-[color:var(--text)]">
+                            <span className="font-mono text-sm text-[color:var(--accent)]">&lt;/&gt;</span>
                             <span>Leonnardo Serafim</span>
                         </p>
                     </a>
@@ -59,18 +59,18 @@ export default function Header({ theme, toggleTheme, page = "home" }) {
                             type="button"
                             onClick={toggleTheme}
                             aria-label="Alternar tema"
-                            className="flex h-9 w-9 items-center justify-center rounded-full border border-[color:var(--line)] text-[color:var(--text)] transition hover:bg-black/5 dark:hover:bg-white/6"
+                            className="flex h-10 w-10 items-center justify-center rounded-full border border-[color:var(--line)] text-[color:var(--text)] transition hover:bg-black/5 dark:hover:bg-white/6"
                         >
-                            {theme === "light" ? <FaMoon size={13} /> : <FaSun size={14} />}
+                            {theme === "light" ? <FaMoon size={14} /> : <FaSun size={15} />}
                         </button>
 
                         <button
                             type="button"
                             onClick={() => setIsMenuOpen((prev) => !prev)}
                             aria-label="Abrir menu"
-                            className="flex h-9 w-9 items-center justify-center rounded-full border border-[color:var(--line)] text-[color:var(--text)] transition hover:bg-black/5 lg:hidden dark:hover:bg-white/6"
+                            className="flex h-10 w-10 items-center justify-center rounded-full border border-[color:var(--line)] text-[color:var(--text)] transition hover:bg-black/5 lg:hidden dark:hover:bg-white/6"
                         >
-                            {isMenuOpen ? <FaTimes size={14} /> : <FaBars size={14} />}
+                            {isMenuOpen ? <FaTimes size={15} /> : <FaBars size={15} />}
                         </button>
                     </div>
                 </div>
