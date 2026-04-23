@@ -26,12 +26,18 @@ import {
 const skillGroups = [
     {
         title: "Backend",
-        skills: [
-            { name: "Python", icon: FaPython, color: "#3776AB" },
-            { name: "C", icon: FaCode, color: "#5C6BC0" },
-            { name: "FastAPI", icon: FaServer, color: "#009688" },
-            { name: "Django", icon: SiDjango, color: "#0C4B33" },
-            { name: "APIs REST", icon: FaServer, color: "#4F46E5" },
+        linkedSkills: [
+            {
+                primary: { name: "Python", icon: FaPython, color: "#3776AB" },
+                related: [
+                    { name: "FastAPI", icon: FaServer, color: "#009688" },
+                    { name: "Django", icon: SiDjango, color: "#0C4B33" },
+                ],
+            },
+            {
+                primary: { name: "C", icon: FaCode, color: "#5C6BC0" },
+                related: [],
+            },
         ],
     },
     {
@@ -52,12 +58,15 @@ const skillGroups = [
     },
     {
         title: "Frontend",
-        skills: [
-            { name: "React", icon: FaReact, color: "#61DAFB" },
-            { name: "JavaScript", icon: SiJavascript, color: "#F7DF1E" },
-            { name: "HTML", icon: SiHtml5, color: "#E34F26" },
-            { name: "CSS", icon: SiCss, color: "#1572B6" },
-            { name: "Tailwind CSS", icon: SiTailwindcss, color: "#06B6D4" },
+        linkedSkills: [
+            {
+                primary: { name: "JavaScript", icon: SiJavascript, color: "#F7DF1E" },
+                related: [{ name: "React", icon: FaReact, color: "#61DAFB" }],
+            },
+            {
+                primary: { name: "HTML & CSS", icon: SiHtml5, color: "#E34F26" },
+                related: [{ name: "Tailwind CSS", icon: SiTailwindcss, color: "#06B6D4" }],
+            },
         ],
     },
 ]
@@ -81,6 +90,24 @@ const secondarySkillGroups = [
 ]
 
 export default function SkillsSection() {
+    function renderSkillChip(skill, compact = false) {
+        const Icon = skill.icon
+
+        return (
+            <div
+                key={skill.name}
+                className={`inline-flex items-center gap-2 rounded-full border border-[color:var(--line)] text-[color:var(--text)] ${
+                    compact
+                        ? "px-3 py-1.5 text-[12px] font-medium"
+                        : "px-3 py-1.5 text-[13px] font-medium"
+                }`}
+            >
+                <Icon size={compact ? 13 : 14} style={{ color: skill.color }} />
+                <span>{skill.name}</span>
+            </div>
+        )
+    }
+
     return (
         <section id="skills" className="section-shell">
             <div className="text-center">
@@ -97,21 +124,47 @@ export default function SkillsSection() {
                             {group.title}
                         </h3>
 
-                        <div className="mt-4 flex flex-wrap gap-2">
-                            {group.skills.map((skill) => {
-                                const Icon = skill.icon
-
-                                return (
+                        {group.linkedSkills ? (
+                            <div className="mt-4 flex flex-wrap items-start gap-x-5 gap-y-4">
+                                {group.linkedSkills.map((cluster) => (
                                     <div
-                                        key={skill.name}
-                                        className="inline-flex items-center gap-2 rounded-full border border-[color:var(--line)] px-3 py-1.5 text-[13px] font-medium text-[color:var(--text)]"
+                                        key={cluster.primary.name}
+                                        className="flex min-w-0 flex-none flex-col items-start justify-start"
                                     >
-                                        <Icon size={14} style={{ color: skill.color }} />
-                                        <span>{skill.name}</span>
+                                        <div>{renderSkillChip(cluster.primary)}</div>
+                                        {cluster.related.length > 0 && (
+                                            <div className="mt-2 flex items-start gap-2.5 pl-1">
+                                                <div className="h-6 w-6 shrink-0 text-[color:var(--line-strong)]">
+                                                    <svg
+                                                        viewBox="0 0 24 24"
+                                                        className="h-full w-full"
+                                                        aria-hidden="true"
+                                                    >
+                                                        <path
+                                                            d="M3 3 C3 10, 6 12, 13 12 H23"
+                                                            fill="none"
+                                                            stroke="currentColor"
+                                                            strokeWidth="1.5"
+                                                            strokeLinecap="round"
+                                                        />
+                                                    </svg>
+                                                </div>
+
+                                                <div className="flex flex-wrap gap-2">
+                                                    {cluster.related.map((skill) =>
+                                                        renderSkillChip(skill, true)
+                                                    )}
+                                                </div>
+                                            </div>
+                                        )}
                                     </div>
-                                )
-                            })}
-                        </div>
+                                ))}
+                            </div>
+                        ) : (
+                            <div className="mt-4 flex flex-wrap gap-2">
+                                {group.skills.map((skill) => renderSkillChip(skill))}
+                            </div>
+                        )}
                     </article>
                 ))}
             </div>
@@ -132,19 +185,7 @@ export default function SkillsSection() {
                             </h3>
 
                             <div className="mt-3 flex flex-wrap gap-2">
-                                {group.skills.map((skill) => {
-                                    const Icon = skill.icon
-
-                                    return (
-                                        <div
-                                            key={skill.name}
-                                            className="inline-flex items-center gap-2 rounded-full border border-[color:var(--line)] px-3 py-1.5 text-[12px] font-medium text-[color:var(--text)]"
-                                        >
-                                            <Icon size={13} style={{ color: skill.color }} />
-                                            <span>{skill.name}</span>
-                                        </div>
-                                    )
-                                })}
+                                {group.skills.map((skill) => renderSkillChip(skill, true))}
                             </div>
                         </article>
                     ))}
