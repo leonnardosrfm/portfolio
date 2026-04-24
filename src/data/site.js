@@ -143,6 +143,7 @@ export const skillCategories = [
         skills: [
             { name: "Xano", icon: "xano" },
             { name: "FlutterFlow", icon: "flutterflow" },
+            { name: "n8n", icon: "n8n" },
         ],
     },
     {

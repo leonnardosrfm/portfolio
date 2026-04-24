@@ -19,6 +19,7 @@ import {
     SiHtml5,
     SiJavascript,
     SiMongodb,
+    SiN8N,
     SiPostgresql,
     SiTailwindcss,
 } from "react-icons/si"
@@ -77,6 +78,7 @@ const secondarySkillGroups = [
         skills: [
             { name: "Xano", icon: FaServer, color: "#2C6BED" },
             { name: "FlutterFlow", icon: FaMobileAlt, color: "#005DF2" },
+            { name: "n8n", icon: SiN8N, color: "#EA4B71" },
         ],
     },
     {

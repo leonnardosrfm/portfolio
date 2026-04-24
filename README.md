@@ -1,32 +1,31 @@
 # Portfólio - Leonnardo Serafim
 
-Portfólio pessoal desenvolvido para apresentar meus projetos, habilidades e foco em backend, APIs e organização de dados.
+Meu portfólio pessoal, criado para apresentar meus projetos, habilidades e algumas ferramentas úteis que rodam direto no navegador.
 
-## Sobre
+A ideia é ter um espaço simples, claro e funcional para mostrar meu trabalho como desenvolvedor, com foco em backend, APIs, organização de dados e construção de soluções práticas.
 
-Este projeto reúne minha apresentação profissional em uma landing page e uma área separada de utilities com ferramentas de conversão e edição de arquivos no navegador.
+## Sobre o projeto
 
-## Tecnologias utilizadas
+Além da página principal com apresentação, habilidades, projetos e contato, o projeto também tem uma área de utilities com conversores e ferramentas para arquivos. Tudo foi pensado para funcionar de forma leve, sem depender de backend para processar os arquivos.
+
+## Stack
 
 - React
 - Vite
 - Tailwind CSS
 - JavaScript
 - React Icons
-- jsPDF
 - PDF.js
+- jsPDF
 - JSZip
 
-### Seção de Utilities
+## Funcionalidades
 
-- conversor de imagens
-- imagem para PDF
-- PDF para Word
-- PDF para Excel
-- PDF para imagem
-- edição *bem* básica de PDF
+- Página inicial com apresentação, habilidades, projetos e contato.
+- Tema claro/escuro persistido no navegador.
+- Área de utilities com conversor de imagens, imagem para PDF, PDF para Word, PDF para Excel, PDF para imagem e editor básico de PDF.
 
-## Como executar o projeto
+## Como executar localmente
 
 Clone o repositório:
 
@@ -34,7 +33,7 @@ Clone o repositório:
 git clone https://github.com/leonnardosrfm/portfolio.git
 ```
 
-Entre na pasta do projeto:
+Entre na pasta:
 
 ```bash
 cd portfolio
@@ -52,16 +51,26 @@ Inicie o ambiente de desenvolvimento:
 npm run dev
 ```
 
+Para gerar a build de produção:
+
+```bash
+npm run build
+```
+
+Para verificar problemas de lint:
+
+```bash
+npm run lint
+```
+
 ## Objetivo
 
-Este portfólio foi desenvolvido para servir como vitrine dos meus estudos, projetos e evolução técnica, além de demonstrar na prática minha capacidade de construir interfaces e ferramentas úteis para o usuário.
+Este projeto é uma vitrine da minha evolução técnica e da forma como gosto de construir: interfaces simples, código organizado e funcionalidades que resolvem problemas reais, mesmo em escopos pequenos.
 
 ## Contato
 
 - LinkedIn: [linkedin.com/in/leonnardo-serafim](https://linkedin.com/in/leonnardo-serafim)
 - GitHub: [github.com/leonnardosrfm](https://github.com/leonnardosrfm)
 - Email: [leonnardo.serafim@proton.me](mailto:leonnardo.serafim@proton.me)
-
----
 
 Desenvolvido por **Leonnardo Serafim**.
