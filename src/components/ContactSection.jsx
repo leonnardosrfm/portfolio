@@ -24,8 +24,7 @@ export default function ContactSection() {
                 <div>
                     <p className="section-kicker">Contato</p>
                     <p className="section-lead mx-auto mt-6">
-                        Estou em busca do meu primeiro estágio na área de dados para aprender com
-                        projetos reais e contribuir com Python, SQL e automação.
+                        Abaixo estão minhas informações para entrar em contato:
                     </p>
 
                     <div className="mt-7 flex flex-wrap justify-center gap-3">
