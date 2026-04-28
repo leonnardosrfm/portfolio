@@ -40,7 +40,6 @@ export default function ProjectDetailPage({ project }) {
 
                 <section className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start">
                     <div>
-                        <p className="section-kicker">Projeto</p>
                         <h1 className="section-title mt-4">{project.title}</h1>
                         <p className="section-lead mt-6 max-w-3xl">
                             {project.detailedDescription}
@@ -82,7 +81,7 @@ export default function ProjectDetailPage({ project }) {
                 <section className="mt-12 grid gap-6 md:grid-cols-[0.9fr_1.1fr]">
                     <div className="rounded-[1.1rem] border border-[color:var(--line)] p-5">
                         <h2 className="text-lg font-semibold text-[color:var(--text)]">
-                            Minha parte
+                            Implementação
                         </h2>
                         <p className="mt-3 leading-7 text-[color:var(--muted)]">
                             {project.role}

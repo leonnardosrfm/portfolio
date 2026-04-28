@@ -61,7 +61,7 @@ export const projects = [
             "API em FastAPI para carregar, consultar e analisar dados de Pokémon em PostgreSQL.",
         detailedDescription:
             "Projeto backend criado para praticar organização de dados, consumo de API externa e consultas estruturadas. A PokeData API permite cadastrar Pokémon manualmente, carregar informações da PokéAPI, salvar os dados em PostgreSQL e consultar estatísticas úteis por tipo, atributos e composição de times.",
-        role: "Modelei os dados, criei os endpoints em FastAPI, integrei a API com PostgreSQL e organizei consultas para listar Pokémon, buscar registros específicos, carregar dados externos e gerar análises simples.",
+        role: "Estruturei o projeto pensando em um fluxo completo de dados: buscar informações na PokéAPI, tratar os campos mais importantes, salvar tudo no PostgreSQL e expor endpoints para consulta e análise. Também organizei rotas para listar Pokémon com filtros, buscar registros específicos, carregar dados externos ,gerar estatísticas simples de Pokémons e times. E na última atualização, a API suporta todas as gerações de Pokémon.",
         highlights: [
             "Carga individual ou em lote de Pokémon a partir da PokéAPI.",
             "Consultas para listar, filtrar e buscar Pokémon por ID.",
@@ -110,11 +110,12 @@ export const projects = [
             "Bot público em PT-BR com comandos utilitários, clima, música, TTS e leitura automática de mensagens.",
         detailedDescription:
             "Bot criado para automatizar interações em servidores Discord, reunindo comandos utilitários e integrações externas em uma experiência simples para o usuário.",
-        role: "Desenvolvimento dos comandos, integração com APIs externas e organização dos fluxos do bot.",
+        role: "Desenvolvimento dos comandos, integração com APIs externas e organização dos fluxos do bot. A idéia de criação desse bot foi principalmente para comandos utilitários no geral, mas coincidentemente no mesmo momento surgiu a necessidade de uma pessoa sem microfone precisar se comunicar, foi aí que eu implementei o TTS automático, assim que uma mensagem de um usuário é enviado em um canal específico, o bot lê automaticamente.",
         highlights: [
             "Automação de tarefas dentro do Discord.",
             "Uso de APIs externas para recursos como clima e utilidades.",
             "Prática com eventos, comandos e tratamento de mensagens em Python.",
+            "Leitura automática de mensagens em TTS.",
         ],
         tags: ["Python", "discord.py", "TTS", "Slash Commands"],
         image: "/DiscordBot.svg",
