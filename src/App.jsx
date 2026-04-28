@@ -5,9 +5,17 @@ import ProjectsSection from "./components/ProjectsSection"
 import ContactSection from "./components/ContactSection"
 import Footer from "./components/Footer"
 import useTheme from "./hooks/useTheme"
+import ProjectDetailPage from "./ProjectDetailPage"
+import { projects } from "./data/site"
 
 export default function App() {
     const { theme, toggleTheme } = useTheme()
+    const projectSlug = window.location.pathname.match(/^\/projetos\/([^/]+)\/?$/)?.[1]
+    const selectedProject = projects.find((project) => project.slug === projectSlug)
+
+    if (projectSlug) {
+        return <ProjectDetailPage project={selectedProject} />
+    }
 
     return (
         <div className="min-h-screen text-[color:var(--text)] transition-colors duration-300">

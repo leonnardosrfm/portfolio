@@ -43,6 +43,14 @@ export default function ProjectsSection() {
 
                             <div className="mt-5 flex flex-wrap justify-center gap-5 text-sm font-semibold">
                                 <a
+                                    href={`/projetos/${project.slug}`}
+                                    className="inline-flex items-center gap-2 text-[color:var(--text)] transition hover:text-[color:var(--accent)]"
+                                >
+                                    <FaExternalLinkAlt size={12} />
+                                    Ver projeto
+                                </a>
+
+                                <a
                                     href={project.github}
                                     target="_blank"
                                     rel="noopener noreferrer"
@@ -60,7 +68,7 @@ export default function ProjectsSection() {
                                         className="inline-flex items-center gap-2 text-[color:var(--muted)] transition hover:text-[color:var(--text)]"
                                     >
                                         <FaExternalLinkAlt size={12} />
-                                        Ver projeto
+                                        Demo
                                     </a>
                                 )}
                             </div>

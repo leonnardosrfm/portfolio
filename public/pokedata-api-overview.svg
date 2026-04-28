@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="610" height="545" viewBox="0 0 610 545" role="img" aria-labelledby="title desc">
+  <title id="title">Documentação da PokeData API</title>
+  <desc id="desc">Tela inicial da documentação Swagger da PokeData API.</desc>
+  <rect width="610" height="545" fill="#ffffff"/>
+  <text x="80" y="64" fill="#29344d" font-family="Arial, sans-serif" font-size="38" font-weight="700">PokéData API</text>
+  <rect x="318" y="31" width="50" height="20" rx="9" fill="#8792a6"/>
+  <text x="325" y="46" fill="#ffffff" font-family="Arial, sans-serif" font-size="14" font-weight="700">1.0.0</text>
+  <rect x="373" y="31" width="65" height="20" rx="9" fill="#55b814"/>
+  <text x="381" y="46" fill="#ffffff" font-family="Arial, sans-serif" font-size="14" font-weight="700">OAS 3.1</text>
+  <text x="80" y="86" fill="#2563eb" font-family="Arial, sans-serif" font-size="12">/openapi.json</text>
+
+  <text x="80" y="124" fill="#111827" font-family="Arial, sans-serif" font-size="14">API para carregar, consultar e analisar Pokémon.</text>
+  <text x="80" y="154" fill="#111827" font-family="Arial, sans-serif" font-size="14">API backend desenvolvida com FastAPI e PostgreSQL para:</text>
+
+  <g fill="#1f2937" font-family="Arial, sans-serif" font-size="14">
+    <text x="104" y="186">• cadastrar Pokémon manualmente</text>
+    <text x="104" y="202">• buscar Pokémon da PokéAPI</text>
+    <text x="104" y="218">• carregar vários Pokémon em lote</text>
+    <text x="104" y="234">• consultar lista com filtros e paginação</text>
+    <text x="104" y="250">• visualizar detalhes de um Pokémon por ID</text>
+    <text x="104" y="266">• consultar estatísticas</text>
+    <text x="104" y="282">• analisar times</text>
+  </g>
+
+  <g font-family="Arial, sans-serif" fill="#29344d" font-size="25" font-weight="700">
+    <text x="90" y="368">Pokémon</text>
+    <text x="90" y="423">Estatísticas</text>
+    <text x="90" y="478">Times</text>
+    <text x="90" y="532">default</text>
+  </g>
+
+  <g stroke="#c8cdd5" stroke-width="1">
+    <line x1="80" y1="386" x2="610" y2="386"/>
+    <line x1="80" y1="441" x2="610" y2="441"/>
+    <line x1="80" y1="496" x2="610" y2="496"/>
+  </g>
+</svg>

@@ -41,12 +41,8 @@ export default function UtilitiesSection({ standalone = false }) {
                 <>
                     <span className="section-kicker">Utilidades</span>
                     <h2 className="section-title mt-4 max-w-3xl">
-                        Ferramentas úteis, acessíveis e prontas para uso direto no navegador.
+                        Ferramentas úteis no dia a dia.
                     </h2>
-                    <p className="section-lead mt-6">
-                        Mantive a ideia original das utilities, mas trouxe uma organização mais
-                        clara para facilitar descoberta e uso.
-                    </p>
                 </>
             )}
 
@@ -69,8 +65,8 @@ export default function UtilitiesSection({ standalone = false }) {
                                 onClick={() => setSelectedId(utility.id)}
                                 className={`w-full rounded-[0.85rem] border px-3.5 py-3.5 text-left transition ${
                                     selectedUtility.id === utility.id
-                                        ? "border-[color:var(--line-strong)] bg-[color:var(--accent-soft)] text-[color:var(--text)]"
-                                        : "border-[color:var(--line)] text-[color:var(--text)] hover:bg-black/3 dark:hover:bg-white/3"
+                                        ? "border-[color:var(--line-strong)] bg-[color:var(--card-active)] text-[color:var(--text)]"
+                                        : "border-[color:var(--line)] text-[color:var(--text)] hover:bg-[color:var(--card-hover)]"
                                 }`}
                             >
                                 <p className="text-sm font-semibold">{utility.title}</p>

@@ -18,6 +18,14 @@ const navItemsByPage = {
         { label: "Utilidades", href: "/utilities/", current: true },
         { label: "Contato", href: "/#contato" },
     ],
+    project: [
+        { label: "Início", href: "/" },
+        { label: "Sobre", href: "/#sobre" },
+        { label: "Habilidades", href: "/#skills" },
+        { label: "Projetos", href: "/#projetos", current: true },
+        { label: "Utilidades", href: "/utilities/" },
+        { label: "Contato", href: "/#contato" },
+    ],
 }
 
 export default function Header({ theme, toggleTheme, page = "home" }) {

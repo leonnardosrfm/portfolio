@@ -26,7 +26,18 @@ import {
 
 const skillGroups = [
     {
-        title: "Backend",
+        title: "Dados e BI",
+        skills: [
+            { name: "Python", icon: FaPython, color: "#3776AB" },
+            { name: "SQL", icon: FaDatabase, color: "#4B5563" },
+            { name: "PostgreSQL", icon: SiPostgresql, color: "#336791" },
+            { name: "MongoDB", icon: SiMongodb, color: "#47A248" },
+            { name: "Excel", icon: FaFileExcel, color: "#217346" },
+            { name: "Power BI", icon: FaChartBar, color: "#F2C811" },
+        ],
+    },
+    {
+        title: "Backend e APIs",
         linkedSkills: [
             {
                 primary: { name: "Python", icon: FaPython, color: "#3776AB" },
@@ -42,19 +53,11 @@ const skillGroups = [
         ],
     },
     {
-        title: "Banco de dados",
-        skills: [
-            { name: "PostgreSQL", icon: SiPostgresql, color: "#336791" },
-            { name: "MongoDB", icon: SiMongodb, color: "#47A248" },
-        ],
-    },
-    {
-        title: "Ferramentas",
+        title: "Automação e ferramentas",
         skills: [
             { name: "Git", icon: FaGitAlt, color: "#F05032" },
+            { name: "n8n", icon: SiN8N, color: "#EA4B71" },
             { name: "AWS", icon: FaAws, color: "#FF9900" },
-            { name: "Oracle", icon: FaCloud, color: "#F80000" },
-            { name: "Figma", icon: SiFigma, color: "#A259FF" },
         ],
     },
     {
@@ -78,15 +81,14 @@ const secondarySkillGroups = [
         skills: [
             { name: "Xano", icon: FaServer, color: "#2C6BED" },
             { name: "FlutterFlow", icon: FaMobileAlt, color: "#005DF2" },
-            { name: "n8n", icon: SiN8N, color: "#EA4B71" },
         ],
     },
     {
-        title: "Data & BI",
+        title: "Outras ferramentas",
         skills: [
             { name: "Machine Learning", icon: FaBrain, color: "#8B5CF6" },
-            { name: "Excel", icon: FaFileExcel, color: "#217346" },
-            { name: "Power BI", icon: FaChartBar, color: "#F2C811" },
+            { name: "Oracle", icon: FaCloud, color: "#F80000" },
+            { name: "Figma", icon: SiFigma, color: "#A259FF" },
         ],
     },
 ]

@@ -16,12 +16,14 @@
     color-scheme: light;
     --bg: oklch(96.7% 0.003 264.542);
     --header-bg: oklch(95.3% 0.004 264.542);
-    --bg-soft: #fcfaf6;
+    --bg-soft: oklch(96.7% 0.003 264.542);
     --text: #171717;
     --muted: #666157;
     --line: rgba(23, 23, 23, 0.08);
     --line-strong: rgba(23, 23, 23, 0.14);
     --panel: rgba(255, 255, 255, 0.7);
+    --card-active: rgba(23, 23, 23, 0.04);
+    --card-hover: rgba(23, 23, 23, 0.03);
     --accent: #be5a35;
     --accent-soft: rgba(190, 90, 53, 0.1);
 }
@@ -36,6 +38,8 @@
     --line: rgba(255, 255, 255, 0.08);
     --line-strong: rgba(255, 255, 255, 0.14);
     --panel: rgba(255, 255, 255, 0.04);
+    --card-active: #171a1b;
+    --card-hover: rgba(255, 255, 255, 0.035);
     --accent: #eb8d63;
     --accent-soft: rgba(235, 141, 99, 0.12);
 }

@@ -1,8 +1,8 @@
 export const profile = {
     name: "Leonnardo Serafim",
-    tagline: "Desenvolvedor focado em backend, APIs e organização de dados.",
+    tagline: "Estudante de Ciência da Computação buscando o primeiro estágio em tecnologia.",
     about:
-        "Sou estudante de Ciência da Computação e venho desenvolvendo projetos com foco em backend e integração de dados. Gosto de criar soluções que sejam realmente úteis e impactantes na vida do usuário. Atualmente, estou em busca de uma oportunidade de estágio para evoluir na prática e contribuir com projetos reais.",
+        "Tenho focado meus estudos em dados, SQL, Python e automação, com interesse também em backend e desenvolvimento web. Gosto de criar projetos que organizam informações, conectam APIs e resolvem problemas de forma simples.",
     email: "leonnardo.serafim@proton.me",
     linkedin: "https://linkedin.com/in/leonnardo-serafim/",
     github: "https://github.com/leonnardosrfm",
@@ -38,25 +38,84 @@ export const socialLinks = [
 
 export const projects = [
     {
+        slug: "portfolio-pessoal",
         title: "Portfólio Pessoal",
         description: "Site pessoal para mostrar meus projetos e habilidades.",
+        detailedDescription:
+            "Projeto criado para organizar minha apresentação profissional, destacar estudos, habilidades e projetos em uma experiência simples de navegar.",
+        role: "Desenvolvimento da interface, organização do conteúdo e publicação do site.",
+        highlights: [
+            "Estrutura em React com componentes reutilizáveis.",
+            "Tema claro/escuro com preferências salvas no navegador.",
+            "Seções pensadas para leitura rápida por recrutadores.",
+        ],
         tags: ["React", "Tailwind", "JavaScript", "UI"],
         image: "/Portfolio.png",
         imageClassName: "object-cover",
         github: "https://github.com/leonnardosrfm/portfolio",
     },
     {
+        slug: "pokedata-api",
         title: "PokeData API",
-        description: "API para consultar e organizar dados de Pokémon.",
+        description:
+            "API em FastAPI para carregar, consultar e analisar dados de Pokémon em PostgreSQL.",
+        detailedDescription:
+            "Projeto backend criado para praticar organização de dados, consumo de API externa e consultas estruturadas. A PokeData API permite cadastrar Pokémon manualmente, carregar informações da PokéAPI, salvar os dados em PostgreSQL e consultar estatísticas úteis por tipo, atributos e composição de times.",
+        role: "Modelei os dados, criei os endpoints em FastAPI, integrei a API com PostgreSQL e organizei consultas para listar Pokémon, buscar registros específicos, carregar dados externos e gerar análises simples.",
+        highlights: [
+            "Carga individual ou em lote de Pokémon a partir da PokéAPI.",
+            "Consultas para listar, filtrar e buscar Pokémon por ID.",
+            "Endpoints de estatísticas para top ataque, top velocidade, médias por tipo e resumo geral.",
+            "Análise de times para comparar atributos e entender pontos fortes da composição.",
+        ],
+        examples: [
+            {
+                title: "Carregar dados externos",
+                endpoint: "POST /pokemon/load/{name}",
+                description:
+                    "Busca um Pokémon pelo nome na PokéAPI, trata os dados principais e salva o registro no banco.",
+            },
+            {
+                title: "Consultar estatísticas",
+                endpoint: "GET /stats/by-type",
+                description:
+                    "Agrupa os Pokémon por tipo principal e retorna médias de atributos, útil para comparar padrões.",
+            },
+            {
+                title: "Analisar um time",
+                endpoint: "POST /teams/analyze",
+                description:
+                    "Recebe uma lista de Pokémon e retorna uma visão geral dos atributos do time.",
+            },
+        ],
+        gallery: [
+            {
+                src: "/pokedata-api-overview.png",
+                alt: "Tela inicial da documentação da PokeData API",
+            },
+            {
+                src: "/pokedata-api-endpoints.png",
+                alt: "Lista de endpoints da PokeData API",
+            },
+        ],
         tags: ["Python", "FastAPI", "PostgreSQL"],
         image: "/PokedataAPI.png",
         imageClassName: "object-cover object-center",
         github: "https://github.com/leonnardosrfm/pokedata-api",
     },
     {
+        slug: "bot-discord",
         title: "Bot Discord",
         description:
             "Bot público em PT-BR com comandos utilitários, clima, música, TTS e leitura automática de mensagens.",
+        detailedDescription:
+            "Bot criado para automatizar interações em servidores Discord, reunindo comandos utilitários e integrações externas em uma experiência simples para o usuário.",
+        role: "Desenvolvimento dos comandos, integração com APIs externas e organização dos fluxos do bot.",
+        highlights: [
+            "Automação de tarefas dentro do Discord.",
+            "Uso de APIs externas para recursos como clima e utilidades.",
+            "Prática com eventos, comandos e tratamento de mensagens em Python.",
+        ],
         tags: ["Python", "discord.py", "TTS", "Slash Commands"],
         image: "/DiscordBot.svg",
         imageClassName: "object-cover",
